@@ -1,0 +1,21 @@
+<% include layouts/header %>
+<div class="ui centered container top" >
+    <h1 class="ui centered header">This is the annonce page</h1>
+    <div class="ui four stackable cards visible">
+            <% annonces.map(annonce => { %>
+                <div class="ui card">
+                    <a href="/annonces/<%=annonce.id %>"><img class="ui  image" src="<%= annonce.image %>"/></a>
+                    <div class="content">
+                        <a href="/annonces/<%=annonce.id %>"><p class="ui header"><%= annonce.title %></p></a>
+                        <div class="">
+                            <p> <%= annonce.contenu.substring(0, 150) %>...</p>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span><%= annonce.date.toDateString() %></span>
+                    </div>
+                </div>
+            <%})%>
+    </div>
+</div>
+<% include layouts/footer %>
