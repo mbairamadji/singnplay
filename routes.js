@@ -14,6 +14,11 @@ module.exports =  router
         res.redirect('/annonces')
     })
 
+// A propos
+
+    .get('/apropos', (req, res) => {
+        res.render('apropos')
+    })
 //Get toutes les annonces
     .get('/annonces', (req, res) => {
         Annonce.find({}, (err, allAnnonces) => {

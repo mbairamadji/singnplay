@@ -13,11 +13,46 @@
             <div class="item"> 
                 <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
             </div>
-            <a class="item" href="/">A Propos</a>
-            <a class="item" href="">Annonces</a>
+            <a class="item" href="/apropos">A Propos</a>
+            <a class="item" href="/">Annonces</a>
             <div class="ui right inverted menu">
                 <span class="item">Bienvenue </span>
-                <a class="item" href="/login">Se Connecter</a>
+                <div class="item">
+                    <button class="ui medium button" id="mymodal">Se Connecter</button>
+                    <div class="ui modal">
+                            <i class="close icon"></i>
+                            <div class="ui centered header">
+                              Connexion
+                            </div>
+                            <div class="content">
+                              <div class="left">
+                                <form class="ui form" action="">
+                                    <div class="field">
+                                        <label for="">Identifiant :</label>
+                                        <input type="text">
+                                    </div>
+                                    <div class="field">
+                                        <label for="">Mot de passe :</label>
+                                        <input type="password">
+                                    </div>
+                                    <div class="field">
+                                        <button class="ui primary fluid button">Se Connecter</button>
+                                    </div>                                    
+                                </form>
+                              </div>
+                            </div>
+                            <div class="content">
+                                <div class="ui centered grid">
+                                    <div>Pas de compte?</div>
+                                    <div>
+                                        <button class="ui primary button">S'inscrire</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            </div>
+                          </div>
+                    </div>
                 <a class="item" href="/logout">Se Déconnecter</a>
             </div>
     </div>
