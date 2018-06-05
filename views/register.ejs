@@ -1,0 +1,31 @@
+<% include layouts/header %>
+<div class="ui centered container top raised segment">
+    <h1 class="ui centered header">Inscription</h1>
+    <div class="content">
+    <div class="left">
+        <form class="ui form" action="/inscription" method="POST">
+            <div class="field">
+                <label for="">Identifiant :</label>
+                <input type="text">
+            </div>
+            <div class="field">
+                <label for="">Mot de passe :</label>
+                <input type="password">
+            </div>
+            <div class="field">
+                <label for="">Age :</label>
+                <input type="text">
+            </div>
+                <div class="field">
+                    <label for="">Ville :</label>
+                    <input type="text">
+                </div>
+            <div class="field">
+                <button class="ui primary fluid button">S'inscrire</button>
+            </div>                                    
+        </form>
+    </div>
+    </div>
+</div>   
+
+<% include layouts/footer %>

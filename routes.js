@@ -124,12 +124,13 @@ module.exports =  router
 
 // S'inscrire
 
-    .get('/register', (req, res) => {
+    .get('/inscription', (req, res) => {
     res.render("register")
     })
 
-    .post('/register', (req, res) => {
-        User.register({ username : req.body.username}, req.body.password, (err, user)=> {
+    .post('/inscription', (req, res) => {
+        User.register({ username : req.body.username}, req.body.password, req.body.age, req.body.ville, 
+            (err, user)=> {
             if (err) {
               console.log(err);
               return res.render('register');
