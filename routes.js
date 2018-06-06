@@ -129,14 +129,16 @@ module.exports =  router
     })
 
     .post('/inscription', (req, res) => {
-        User.register({ username : req.body.username}, req.body.password, req.body.age, req.body.ville, 
-            (err, user)=> {
+        User.register( new User({ username : req.body.username, 
+                                  age : req.body.age, 
+                                  ville : req.body.ville}), req.body.password, (err, user)=> {
             if (err) {
               console.log(err);
               return res.render('register');
             } else {
               passport.authenticate("local")(req, res, () => {
                  res.redirect('/annonces')
+                 console.log(req.user)
               })
             }
         })
@@ -144,16 +146,12 @@ module.exports =  router
 
 //Login
 
-    .get('/login', (req, res) => {
-        res.render('login')
-    })
-
     .post('/login', passport.authenticate("local", {
         successRedirect : '/annonces',
-        failureRedirect : '/login'
+        failureRedirect : '/inscription'
 
     }), (req, res) => {
-
+        
     })
 //Logout
 

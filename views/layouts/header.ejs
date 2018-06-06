@@ -16,7 +16,10 @@
             <a class="item" href="/apropos">A Propos</a>
             <a class="item" href="/">Annonces</a>
             <div class="ui right inverted menu">
-                <span class="item">Bienvenue </span>
+                <% if (currentUser) { %>
+                    <span class="item">Bienvenue <%= currentUser.username %> </span>
+                    <a class="item" href="/logout">Se Déconnecter</a>
+                <% } else { %>
                 <div class="item">
                     <button class="ui medium button" id="mymodal">Se Connecter</button>
                     <div class="ui modal">
@@ -25,14 +28,14 @@
                             </div>
                             <div class="content">
                               <div class="left">
-                                <form class="ui form" action="">
+                                <form class="ui form" action="/login" method="POST"> 
                                     <div class="field">
                                         <label for="">Identifiant :</label>
-                                        <input type="text">
+                                        <input type="text" name="username">
                                     </div>
                                     <div class="field">
                                         <label for="">Mot de passe :</label>
-                                        <input type="password">
+                                        <input type="password" name="password" >
                                     </div>
                                     <div class="field">
                                         <button class="ui primary fluid button">Se Connecter</button>
@@ -49,9 +52,9 @@
                                 </div>
                             </div>
                             
-                            </div>
-                          </div>
                     </div>
-                <a class="item" href="/logout">Se Déconnecter</a>
+                </div>
+                <% } %>
+            </div>
             </div>
   
