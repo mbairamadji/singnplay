@@ -22,7 +22,7 @@
                 <% } else { %>
                 <div class="item">
                     <button class="ui medium button" id="mymodal">Se Connecter</button>
-                    <div class="ui modal">
+                    <div class="ui small modal">
                             <div class="ui centered header">
                               Connexion
                             </div>
@@ -31,11 +31,17 @@
                                 <form class="ui form" action="/login" method="POST"> 
                                     <div class="field">
                                         <label for="">Identifiant :</label>
-                                        <input type="text" name="username">
+                                        <div class="ui left icon input" >
+                                            <i class="user icon"></i>
+                                            <input type="text" name="username" placeholder="">
+                                        </div>
                                     </div>
                                     <div class="field">
                                         <label for="">Mot de passe :</label>
-                                        <input type="password" name="password" >
+                                        <div class="ui left icon input">
+                                          <i class="lock icon"></i>
+                                          <input type="password" name="password" >
+                                        </div>
                                     </div>
                                     <div class="field">
                                         <button class="ui primary fluid button">Se Connecter</button>
