@@ -15,22 +15,13 @@
             </div>
             <a class="item" href="/apropos">A Propos</a>
             <a class="item" href="/">Annonces</a>
-<<<<<<< HEAD
-            <% if (currentUser) { %>
-            <a  class="item" href="/annonces/new">Ajouter une annonce</a>
-=======
              <% if (currentUser) { %>
             <a class="item" href="/annonces/ajouter">Ajouter une annonce</a> 
->>>>>>> 3845fc6d54d2f7ed4eb080af3b9cd93878ee0444
             <div class="ui right inverted menu">
                     <span class="item">Bienvenue <%= currentUser.username %> </span>
                     <a class="item" href="/logout">Se Déconnecter</a>
                 <% } else { %>
-<<<<<<< HEAD
-                <div class="item right floated">
-=======
                 <div class="right floated item">
->>>>>>> 3845fc6d54d2f7ed4eb080af3b9cd93878ee0444
                     <button class="ui medium button" id="mymodal">Se Connecter</button>
                     <div class="ui small modal">
                             <div class="ui centered header">
