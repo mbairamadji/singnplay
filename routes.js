@@ -43,7 +43,7 @@ module.exports =  router
     })
 
 // Le formulaire pour ajouter une nouvelle annonce
-    .get('/annonces/new',isLoggedIn, (req, res) => {
+    .get('/annonces/ajouter',isLoggedIn, (req, res) => {
         res.render('new')
     })
 
@@ -130,6 +130,7 @@ module.exports =  router
 
     .post('/inscription', (req, res) => {
         User.register( new User({ username : req.body.username, 
+                                  image : req.body.image,
                                   age : req.body.age, 
                                   ville : req.body.ville}), req.body.password, (err, user)=> {
             if (err) {

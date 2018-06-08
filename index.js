@@ -13,6 +13,7 @@ dotenv.config()
 
 const app = express()
 
+//mongoose.Promise = global.Promise
 //Connexion à la base de donnée
 mongoose.connect(process.env.MLAB_URI);
 
@@ -43,6 +44,6 @@ app.use((req, res, next) => {
 app.use('/', routes)
 
 
-app.listen(3000, () => {
+app.listen(process.env.PORT ||3000, () => {
     console.log("App tourne sur le port 3000")
 })
