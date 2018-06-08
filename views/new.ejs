@@ -1,6 +1,23 @@
 <% include layouts/header %>
-<divtop class="ui container top">
-    <h1 class="ui centered header">Ajouter une nouvelle annonce</h1>
-</div>
+<div class="ui centered container top raised segment">
+    <h1 class="ui centered header">Ajouter votre annonce</h1>
+    <div class="content">
+    <div class="left">
+        <form class="ui form" action="/annonces" method="POST">
+            <div class="field">
+                <label for="">Titre :</label>
+                <input type="text" name="username" placeholder="Donnez un titre à votre annonce" required >
+            </div>
+            <div class="field">
+                <label for="">Description :</label>
+                <textarea type="text" name="descrition" placeholder="Que recherchez-vous?" required ></textarea>
+            </div>
+            <div class="field">
+                <button class="ui primary fluid button">Ajouter</button>
+            </div>                                    
+        </form>
+    </div>
+    </div>
+</div>   
     
 <% include layouts/footer %>

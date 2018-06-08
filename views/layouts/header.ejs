@@ -15,13 +15,13 @@
             </div>
             <a class="item" href="/apropos">A Propos</a>
             <a class="item" href="/">Annonces</a>
-            <% if (currentUser) { %>
-            <a  class="item" href="/annonces/new">Ajouter une annonce</a>
+             <% if (currentUser) { %>
+            <a class="item" href="/annonces/ajouter">Ajouter une annonce</a> 
             <div class="ui right inverted menu">
                     <span class="item">Bienvenue <%= currentUser.username %> </span>
                     <a class="item" href="/logout">Se Déconnecter</a>
                 <% } else { %>
-                <div class="item right floated">
+                <div class="right floated item">
                     <button class="ui medium button" id="mymodal">Se Connecter</button>
                     <div class="ui small modal">
                             <div class="ui centered header">
