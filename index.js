@@ -7,13 +7,17 @@ const LocalStrategy  = require('passport-local')
 const methodOverride = require('method-override')
 const User           = require('./models/user')
 const morgan         = require('morgan')
-const routes         = require('./routes')
+const annonceRoute   = require("./routes/annonceRoute")
+const authRoute      = require("./routes/authRoute")
+const commentRoute   = require("./routes/commentRoute")
 const dotenv         = require('dotenv')
+
 dotenv.config()
+
 
 const app = express()
 
-//mongoose.Promise = global.Promise
+mongoose.Promise = global.Promise
 //Connexion à la base de donnée
 mongoose.connect(process.env.MLAB_URI);
 
@@ -24,24 +28,31 @@ app.use(express.urlencoded({extended : true}))
 app.use(morgan('dev'))
 app.use(methodOverride('_method'))
 
+
+
+
+
 //Configuration de Passport
 app.use(session({
     secret : 'dynamizzy',
     resave : false,
     saveUninitialized : false
 }))
+
 app.use(passport.initialize())
 app.use(passport.session())
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
-passport.use(new LocalStrategy(User.authenticate()))
+require('./config/passport')(passport)
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     next();
 })
 
-app.use('/', routes)
+// Routes
+app.use('/annonces', annonceRoute)
+app.use(authRoute)
+app.use(commentRoute)
+
 
 
 app.listen(process.env.PORT ||3000, () => {

@@ -4,11 +4,11 @@
     <div class="ui four stackable cards visible">
             <% annonces.map(annonce => { %>
                 <div class="ui card">
-                    <a href="/annonces/<%=annonce.id %>"><img class="ui  image" src="<%= annonce.image %>"/></a>
+                    <a href="/annonces/<%=annonce.id %>"><img class="ui  image" src=".<%= annonce.image %>"/>
                     <div class="content">
                         <a href="/annonces/<%=annonce.id %>"><p class="ui header"><%= annonce.title %></p></a>
                         <div class="">
-                            <p> <%= annonce.contenu.substring(0, 150) %>...</p>
+                            <p> <%= annonce.contenu.substring(0, 350) %>...</p>
                         </div>
                     </div>
                     <div class="extra content">

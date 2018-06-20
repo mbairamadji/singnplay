@@ -3,7 +3,7 @@
     <h1 class="ui centered header">Inscription</h1>
     <div class="content">
     <div class="left">
-        <form class="ui form" action="/inscription" method="POST">
+        <form class="ui form" action="/inscription" method="POST" enctype="multipart/form-data">
             <div class="field">
                 <label for="">Identifiant :</label>
                 <input type="text" name="username" placeholder="Choisissez votre identifiant" required >
@@ -20,6 +20,10 @@
                     <label for="">Ville :</label>
                     <input type="text" name="ville" placeholder="Entrez votre ville" >
                 </div>
+            <div class="field">
+                <label for="">Image :</label>
+                <input type="file" name="photo" >
+            </div>
             <div class="field">
                 <button class="ui primary fluid button">S'inscrire</button>
             </div>                                    

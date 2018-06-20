@@ -3,8 +3,8 @@ const Schema = mongoose.Schema
 
 const AnnonceModel = new Schema({
     titre : String,
-    image : String,
     contenu : String,
+    image : String,
     tag : String,
     date : {
         type : Date,

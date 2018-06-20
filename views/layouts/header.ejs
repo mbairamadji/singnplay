@@ -15,10 +15,12 @@
             </div>
             <a class="item" href="/apropos">A Propos</a>
             <a class="item" href="/">Annonces</a>
-             <% if (currentUser) { %>
             <a class="item" href="/annonces/ajouter">Ajouter une annonce</a> 
+             <% if (currentUser) { %>
+            
             <div class="ui right inverted menu">
                     <span class="item">Bienvenue <%= currentUser.username %> </span>
+                    <img src=".<%= currentUser.image.slice(6) %>" class="ui item small circular image" />
                     <a class="item" href="/logout">Se Déconnecter</a>
                 <% } else { %>
                 <div class="right floated item">
