@@ -5,8 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sing'N'Play</title>
+    <link rel="icon" type="image/png" href="/images/sing'n'play.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@2.6.0/dist/style.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@2.6.0/assets/css/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="//js.api.here.com/v3/3.0/mapsjs-ui.css" />
+
+ <!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script> -->
+   
     <link rel="stylesheet" href="/stylesheet/style.css">
+    <!-------------------------------------------------Scripts-------------------------------------------------------------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+    
+<!--script src="https://unpkg.com/leaflet-geosearch@2.6.0/dist/bundle.min.js"></script> -->
+
+    <script  type="text/javascript" charset="utf-8"></script>
+    
 </head>
 <body>
     <div class="ui inverted fixed menu">
@@ -20,7 +36,7 @@
             
             <div class="ui right inverted menu">
                     <span class="item">Bienvenue <%= currentUser.username %> </span>
-                    <img src=".<%= currentUser.image.slice(6) %>" class="ui item small circular image" />
+                    <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" /></span>
                     <a class="item" href="/logout">Se Déconnecter</a>
                 <% } else { %>
                 <div class="right floated item">

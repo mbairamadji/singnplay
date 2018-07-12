@@ -1,0 +1,49 @@
+<% include layouts/header %>
+<divtop class="ui container top">
+    
+    <div class="ui container items">
+        <div class="item">
+            <div class="ui medium image">
+                <img  src="<%= annonce.author.image.slice(6) %>" />
+            </div>
+            <div class="content">
+                <div class="ui raised segment">
+                   <h3 class="ui centered header"><%= annonce.titre %> </h3>
+                   <div class="description">
+                        <%= annonce.contenu %> 
+                   </div> 
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="">
+                <h3 class="ui header">Mes Medias</h3>
+            </div>
+        </div>
+        <div class="item">
+               <h3 class="ui header">Contact</h3> 
+               
+        </div>
+           
+    </div>
+</div>
+<div id="mapContainer"></div>
+<script>
+var map;
+var marker;
+var center = {lat: <%= annonce.author.geometry.lat%>, lng: <%= annonce.author.geometry.long%>}
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('mapContainer'), {
+          center: center,
+          zoom: 17
+        });
+        marker = new google.maps.Marker({
+            position : center,
+            map : map
+        })
+      }
+</script> 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSWoLFFZuR8O2uTZgfmOkB1yW18XOnli0&callback=initMap"
+    async defer></script>
+    
+<% include layouts/footer %>

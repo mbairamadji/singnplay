@@ -30,7 +30,7 @@ module.exports = function(passport) {
                   newUser.password = newUser.generateHash(password);
                   newUser.age      = req.body.age;
                   newUser.image    = req.file.path;
-                  newUser.ville    = req.body.ville;
+                  newUser.adresse    = req.body.adresse;
                   newUser.save((err) => {
                       if (err)
                       throw err;

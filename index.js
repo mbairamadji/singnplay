@@ -1,6 +1,7 @@
 const express        = require('express')
 const mongoose       = require('mongoose')
 const ejs            = require('ejs')
+const cors           = require('cors')
 const session        = require('express-session')
 const passport       = require('passport')
 const LocalStrategy  = require('passport-local')
@@ -10,6 +11,7 @@ const morgan         = require('morgan')
 const annonceRoute   = require("./routes/annonceRoute")
 const authRoute      = require("./routes/authRoute")
 const commentRoute   = require("./routes/commentRoute")
+const codeAdresse    = require("./googlemaps")
 const dotenv         = require('dotenv')
 
 dotenv.config()
@@ -24,12 +26,17 @@ mongoose.connect(process.env.MLAB_URI);
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))
 app.use(express.json())
+app.use(cors())
 app.use(express.urlencoded({extended : true}))
 app.use(morgan('dev'))
 app.use(methodOverride('_method'))
 
 
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 
 //Configuration de Passport
@@ -44,6 +51,7 @@ app.use(passport.session())
 require('./config/passport')(passport)
 
 app.use((req, res, next) => {
+  //  console.log(req.user)
     res.locals.currentUser = req.user;
     next();
 })

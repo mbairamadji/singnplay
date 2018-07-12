@@ -13,3 +13,7 @@ body {
 .ui.container.top {
     margin-top: 10em;
 }
+#mapContainer { 
+    height: 500px; 
+    
+}

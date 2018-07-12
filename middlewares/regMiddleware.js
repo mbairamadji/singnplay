@@ -7,7 +7,7 @@ function regMiddleware (req, res, next) {
         cb(null,  './public/uploads')
     },
     filename : function(req, file, cb){
-        console.log(file)
+      //  console.log(file)
         let imageName = file.originalname
         cb(null, imageName)
     }

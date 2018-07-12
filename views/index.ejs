@@ -3,12 +3,19 @@
     <h1 class="ui centered header">Ajouts récents</h1>
     <div class="ui four stackable cards visible">
             <% annonces.map(annonce => { %>
-                <div class="ui card">
-                    <a href="/annonces/<%=annonce.id %>"><img class="ui  image" src=".<%= annonce.image %>"/>
+                <div class="ui link card" href="/annonces/<%=annonce.id %>">
                     <div class="content">
-                        <a href="/annonces/<%=annonce.id %>"><p class="ui header"><%= annonce.title %></p></a>
+                        <a href="/annonces/<%=annonce.id %>">
+                            <h5 class="ui header"><%= annonce.author.username %></h5>
+                        </a> 
+                          <span class="meta"> <%= annonce.author.ville %></span>
+                    </div>
+                    <a href="/annonces/<%=annonce.id %>">
+                        <img class="ui image" src=".<%= annonce.image %>"/>
+                    </a>
+                    <div class="content">
                         <div class="">
-                            <p> <%= annonce.contenu.substring(0, 350) %>...</p>
+                            <p> <%= annonce.contenu.substring(0, 150) %>...</p>
                         </div>
                     </div>
                     <div class="extra content">
