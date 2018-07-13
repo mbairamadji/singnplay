@@ -11,7 +11,6 @@ const morgan         = require('morgan')
 const annonceRoute   = require("./routes/annonceRoute")
 const authRoute      = require("./routes/authRoute")
 const commentRoute   = require("./routes/commentRoute")
-const codeAdresse    = require("./googlemaps")
 const dotenv         = require('dotenv')
 
 dotenv.config()

@@ -3,21 +3,12 @@ const Router        = express.Router()
 const regMiddleware = require("../middlewares/regMiddleware")
 const Annonce       = require("../models/annonce")
 const request       = require("request")
-
+const dotenv        = require("dotenv")
+dotenv.config()
 
 var googleMapsClient = require('@google/maps').createClient({
-  key: 'AIzaSyDSWoLFFZuR8O2uTZgfmOkB1yW18XOnli0'
+  key: process.env.GOOGLE_KEY
 });
-const googleKey = 'AIzaSyDSWoLFFZuR8O2uTZgfmOkB1yW18XOnli0'
-
-function geocodeLatReq(adresse) {
-  request(`https://maps.googleapis.com/maps/api/geocode/json?address=${adresse}&key=${googleKey}`,(err, response, body)=> {
-      if(!err && response.statusCode == 200) {
-         return JSON.parse(body).results[0].geometry.location.lat;
-             
-      }
-  })  
-};
 
 
 module.exports = Router

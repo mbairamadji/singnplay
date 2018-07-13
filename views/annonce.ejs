@@ -43,7 +43,7 @@ var center = {lat: <%= annonce.author.geometry.lat%>, lng: <%= annonce.author.ge
         })
       }
 </script> 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSWoLFFZuR8O2uTZgfmOkB1yW18XOnli0&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=process.env['GOOGLE_KEY']%>&callback=initMap"
     async defer></script>
     
 <% include layouts/footer %>
