@@ -5,9 +5,31 @@ body {
     background-color : #FFF661!important;
 }
 
+.ui.button {
+    font-weight :400 !important;
+}
+
+.voir_btn {
+    width: 100%;
+    margin-bottom: 1.3em !important;
+    -webkit-transition-duration: 0.4s !important; /* Safari */
+    transition-duration: 0.4s !important;
+    cursor: pointer;
+}
+.center_content {
+    margin: auto;
+}
+ .ui.basic.button:hover {
+    background-color: #1b1c1d !important;
+    color: #FFF661 !important;
+}
 .form {
     width: 60%;
     margin: auto;
+}
+
+#identifiant {
+    margin-left: -2em;
 }
 
 .ui.container.top {
@@ -17,3 +39,7 @@ body {
     height: 500px; 
     
 }
+
+#options option[value="piano"]   { 
+    background-image:url(images/piano.png); 
+    }

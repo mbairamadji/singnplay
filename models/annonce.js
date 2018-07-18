@@ -23,7 +23,9 @@ const AnnonceSchema = new Schema({
                long : Number,
                lat : Number
             },
-            image : String
+            city : String,
+            image : String,
+            phone : String
     }
 })
 

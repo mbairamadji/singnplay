@@ -1,33 +1,67 @@
 <% include layouts/header %>
-<divtop class="ui container top">
-    
+<div class="ui container top">
     <div class="ui container items">
         <div class="item">
             <div class="ui medium image">
                 <img  src="<%= annonce.author.image.slice(6) %>" />
             </div>
+            
             <div class="content">
                 <div class="ui raised segment">
                    <h3 class="ui centered header"><%= annonce.titre %> </h3>
-                   <div class="description">
+                    <div class="description">
                         <%= annonce.contenu %> 
-                   </div> 
+                    </div> 
+                </div>
+                <div class="ui styled container accordion">
+                    <h3 class="title">
+                        <i class="dropdown icon"></i>
+                        Mes Medias
+                    </h3>
+                    <div class="content">
+                        <p>Liens Youtube, Vimeo, Dailymotion...</p>
+                        
+                    </div>
+                    <h3 class="title">
+                        <i class="dropdown icon"></i>
+                        Contact
+                    </h3>
+                    <div class="content">
+                         <p>Téléphone : <%= annonce.author.phone%></p>
+                         <p>Adresse : <%= annonce.author.adresse %></p>
+                         <div class ="ui container" id="mapContainer"></div>
+                    </div>
+                    <h3 class="title">
+                        <i class="dropdown icon"></i>
+                        Messages
+                    </h3>
+                    <form class="ui center_content content form">
+                        <div class="field" action="" method="">
+                            <textarea name="message" id="m" ></textarea>
+                        </div>
+                        <div class="field">
+                            <button class="ui button">Envoyer un message</button>
+                        </div>
+                    </form>
+                </div>
                 </div>
             </div>
-        </div>
-        <div class="item">
-            <div class="">
-                <h3 class="ui header">Mes Medias</h3>
+            <% if (currentUser && currentUser._id.equals(annonce.author.id)) { %>
+            <div class="item">
+                <a class="" href="/annonces/<%=annonce.id%>/edit" >
+                    <button class="ui basic button">Editer annonce</button>
+                </a> 
+                <a class="" href="" style="display:inline">
+                    <button class="ui negative button">Supprimer annonce</button>
+                </a>
             </div>
+            <% } %>
         </div>
-        <div class="item">
-               <h3 class="ui header">Contact</h3> 
-               
-        </div>
-           
-    </div>
 </div>
-<div id="mapContainer"></div>
+
+<script>
+    var socket = io.connect();
+</script>
 <script>
 var map;
 var marker;

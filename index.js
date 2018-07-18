@@ -22,6 +22,13 @@ mongoose.Promise = global.Promise
 //Connexion à la base de donnée
 mongoose.connect(process.env.MLAB_URI);
 
+//Configuration de socket.io
+const http = require("http").Server(app)
+const io = require("socket.io")(http)
+io.on('connection', (socket) => {
+  console.log('a user is connected')
+})
+
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))
 app.use(express.json())
@@ -29,14 +36,6 @@ app.use(cors())
 app.use(express.urlencoded({extended : true}))
 app.use(morgan('dev'))
 app.use(methodOverride('_method'))
-
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
 
 //Configuration de Passport
 app.use(session({

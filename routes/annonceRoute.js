@@ -21,21 +21,21 @@ module.exports = Router
     })
 
 // Créer une annonce
-    .post('/', regMiddleware, (req, res) => {
+    .post('/', isLoggedIn, regMiddleware, (req, res) => {
         Annonce.create({
             titre   : req.body.titre,
             contenu : req.body.contenu,
             image   : req.file.path.slice(6),
             tag     : req.body.tag,
-            
         }, (err, annonce) => {
             if (err) {
              res.send(err)   
             } else {
-             annonce.author.id = req.user._id;
+             annonce.author.id       = req.user._id;
              annonce.author.username = req.user.username;
-             annonce.author.adresse = req.user.adresse;
-             annonce.author.image = req.user.image;
+             annonce.author.adresse  = req.user.adresse;
+             annonce.author.image    = req.user.image;
+             annonce.author.phone    = req.user.phone;
     
             googleMapsClient.geocode({
               address: annonce.author.adresse
@@ -43,31 +43,31 @@ module.exports = Router
               if (err) {
                   console.log(err)
               } else {
+                 // console.log(response.json.results)
                  annonce.author.geometry.lat = response.json.results[0].geometry.location.lat;
                  annonce.author.geometry.long = response.json.results[0].geometry.location.lng;
+                 annonce.author.city = response.json.results[0].address_components[2].long_name;
                  annonce.save(err => {
                  if (err) {
                      res.send(err)
                     } else {
                       console.log(annonce)
                       res.redirect("/") 
-                  }
-                 })
-              }
-             
-            } );
-             
+                            }
+                        })
+                    }
+                });
             }
         })
     })
 
 // Le formulaire pour ajouter une nouvelle annonce
-    .get('/ajouter', (req, res) => {
+    .get('/ajouter', isLoggedIn, (req, res) => {
         res.render('new')
     })
 
 // Get une annonce par son id
-    .get('/:id', (req, res) => {
+    .get('/:id', isLoggedIn, (req, res) => {
         Annonce.findById(req.params.id)
         .populate("comments")
         .exec((err, annonce) => {
@@ -80,7 +80,7 @@ module.exports = Router
     })
 
 // Formulaire d'édition d'une annonce
-    .get('/:id/edit', (req, res) => {
+    .get('/:id/edit', isLoggedIn, (req, res) => {
        Annonce.findById(req.params.id, (err, annonce)=> {
            err ? res.send(err) : res.render('edit', { annonce : annonce})
        })
@@ -91,13 +91,14 @@ module.exports = Router
             if (err) {
                 res.send(err)
             } else {
-                annonce.titre    = req.body.titre
-                annonce.image    = req.body.image
-                annonce.contenu  = req.body.contenu
-                annonce.tag      = req.body.tag
-                
-                annonce.save(err => {
-                    err ? res.send(err) : res.redirect('/annonces/' + req.params.id )
+            annonce.titre = req.body.titre;
+            annonce.contenu = req.body.contenu;
+            annonce.save(err => {
+                if (err){
+                    res.send(err)
+                    } else {
+                    res.redirect('/annonces/' + req.params.id )
+                    }
                 })
             }
         })
@@ -116,5 +117,23 @@ function isLoggedIn(req, res, next){
     if(req.isAuthenticated()) {
     return next();
 }
-    res.redirect('/login')
+    res.redirect('back')
+}
+
+function checkOwnership(req, res, next) {
+    if(req.isAuthenticated()) {
+        Annonce.findById(req.params.id, (err, annonce) => {
+            if (err) {
+                res.send(err)
+            } else {
+                    if (annonce.author.id.equals(req.user._id)) {
+                        next();
+                    } else {
+                    res.redirect("back")
+                }
+            }
+        })
+    } else {
+         res.redirect("back")
+    }
 }
