@@ -13,7 +13,7 @@
                         <%= annonce.contenu %> 
                     </div> 
                 </div>
-                <div class="ui styled container accordion">
+                <div class="ui styled accordion">
                     <h3 class="title">
                         <i class="dropdown icon"></i>
                         Mes Medias
@@ -22,11 +22,11 @@
                         <p>Liens Youtube, Vimeo, Dailymotion...</p>
                         
                     </div>
-                    <h3 class="title">
+                    <h3 class="active title">
                         <i class="dropdown icon"></i>
                         Contact
                     </h3>
-                    <div class="content">
+                    <div class="active content">
                          <p>Téléphone : <%= annonce.author.phone%></p>
                          <p>Adresse : <%= annonce.author.adresse %></p>
                          <div class ="ui container" id="mapContainer"></div>
@@ -51,11 +51,56 @@
                 <a class="" href="/annonces/<%=annonce.id%>/edit" >
                     <button class="ui basic button">Editer annonce</button>
                 </a> 
-                <a class="" href="" style="display:inline">
-                    <button class="ui negative button">Supprimer annonce</button>
-                </a>
+                <div class="" href="" style="display:inline">
+                        <button class="ui negative button" id="delete">Supprimer l'annonce</button>
+                        <div class="ui tiny basic modal transition visible scrolling">
+                            <div class="ui header">
+                                Supression
+                            </div>
+                            <div class="content">
+                                <p>Etes-vous sûr de vouloir supprimer votre annonce?</p>
+                            </div>
+                            <div class="actions">
+                                <div class="ui green basic cancel inverted button ">
+                                    <i class="remove icon"></i>
+                                    Non
+                                </div>
+                                <form action="/annonces/<%= annonce.id %>/?_method=DELETE" method="POST" style="display:inline">
+                                    <button class="ui red basic ok inverted button">
+                                        <i class="check icon"></i>
+                                        Oui
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                </div>
             </div>
             <% } %>
+        </div>
+        <h4 class="ui horizontal divider header">
+            <i class="outline comment icon"></i>
+            Commentaires
+        </h4>
+        <div class="center_content">
+            <form class="ui form" action="/annonces/<%= annonce.id %>/comments" method="POST">
+                <div class="field">
+                    <textarea name="comment[text]" placeholder="votre commentaire"></textarea>
+                </div>
+                <div class="field">
+                    <button class="ui basic fluid button">Envoyer</button>
+                </div>
+            </form>
+            
+                <% annonce.commentaires.map(comment => { %>
+                <div class="ui comment message">
+                    <img class="ui avatar image" src="<%= comment.author.image.slice(6) %>"
+                    <h4 class="ui header">
+                        <%= comment.author.username %>
+                    </h4>
+                    <p> <%= comment.text %> </p>
+                    <p> <%= comment.date.toLocaleDateString() %> </p>
+                </div>
+                <% }) %>
         </div>
 </div>
 

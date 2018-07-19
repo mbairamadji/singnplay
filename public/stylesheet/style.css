@@ -6,15 +6,20 @@ body {
 }
 
 .ui.button {
-    font-weight :400 !important;
+    font-weight :700 !important;
 }
 
 .voir_btn {
     width: 100%;
+    font-weight :400 !important;
     margin-bottom: 1.3em !important;
     -webkit-transition-duration: 0.4s !important; /* Safari */
     transition-duration: 0.4s !important;
     cursor: pointer;
+}
+
+.ui.basic.button {
+    background: #ededed!important;
 }
 .center_content {
     margin: auto;
@@ -23,9 +28,21 @@ body {
     background-color: #1b1c1d !important;
     color: #FFF661 !important;
 }
-.form {
+
+.ui.link.card {
+    cursor: default !important;
+}
+.ui.styled.accordion {
+    width: auto;
+}
+
+.form, .ui.comment.message {
     width: 60%;
     margin: auto;
+}
+
+.ui.comment.message {
+    margin-top: 1em;
 }
 
 #identifiant {

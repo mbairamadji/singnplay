@@ -1,9 +1,9 @@
-const express       = require("express")
-const Router        = express.Router()
-const regMiddleware = require("../middlewares/regMiddleware")
-const Annonce       = require("../models/annonce")
-const request       = require("request")
-const dotenv        = require("dotenv")
+const express        = require("express")
+const Router         = express.Router()
+const middlewareObj  = require("../middlewares/middlewares")
+const Annonce        = require("../models/annonce")
+const request        = require("request")
+const dotenv         = require("dotenv")
 dotenv.config()
 
 var googleMapsClient = require('@google/maps').createClient({
@@ -21,7 +21,7 @@ module.exports = Router
     })
 
 // Créer une annonce
-    .post('/', isLoggedIn, regMiddleware, (req, res) => {
+    .post('/', middlewareObj.isLoggedIn, middlewareObj.regMiddleware, (req, res) => {
         Annonce.create({
             titre   : req.body.titre,
             contenu : req.body.contenu,
@@ -62,14 +62,14 @@ module.exports = Router
     })
 
 // Le formulaire pour ajouter une nouvelle annonce
-    .get('/ajouter', isLoggedIn, (req, res) => {
+    .get('/ajouter', middlewareObj.isLoggedIn, (req, res) => {
         res.render('new')
     })
 
 // Get une annonce par son id
-    .get('/:id', isLoggedIn, (req, res) => {
+    .get('/:id', middlewareObj.isLoggedIn, (req, res) => {
         Annonce.findById(req.params.id)
-        .populate("comments")
+        .populate("commentaires")
         .exec((err, annonce) => {
             if (err) {
               res.send(err)  
@@ -80,19 +80,23 @@ module.exports = Router
     })
 
 // Formulaire d'édition d'une annonce
-    .get('/:id/edit', isLoggedIn, (req, res) => {
+    .get('/:id/edit', middlewareObj.isLoggedIn, (req, res) => {
        Annonce.findById(req.params.id, (err, annonce)=> {
            err ? res.send(err) : res.render('edit', { annonce : annonce})
        })
     })
 // Editer une annonce par son id
-    .put('/:id', (req, res) => {
+    .put('/:id', middlewareObj.checkOwnership, middlewareObj.regMiddleware,(req, res) => {
         Annonce.findById(req.params.id, (err, annonce) => {
             if (err) {
                 res.send(err)
             } else {
             annonce.titre = req.body.titre;
             annonce.contenu = req.body.contenu;
+            if (req.file) {
+              annonce.image = req.file.path.slice(6);  
+            }
+            annonce.tag = req.body.tag;
             annonce.save(err => {
                 if (err){
                     res.send(err)
@@ -105,35 +109,8 @@ module.exports = Router
     })
 
 // Supprimer une annonce
-    .delete('/:id', (req, res) => {
+    .delete('/:id', middlewareObj.checkOwnership, (req, res) => {
         Annonce.findByIdAndRemove(req.params.id, (err, annonce) => {
             err ? res.send(err) : res.redirect('/annonces')
         })
     })
-
-
-  
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()) {
-    return next();
-}
-    res.redirect('back')
-}
-
-function checkOwnership(req, res, next) {
-    if(req.isAuthenticated()) {
-        Annonce.findById(req.params.id, (err, annonce) => {
-            if (err) {
-                res.send(err)
-            } else {
-                    if (annonce.author.id.equals(req.user._id)) {
-                        next();
-                    } else {
-                    res.redirect("back")
-                }
-            }
-        })
-    } else {
-         res.redirect("back")
-    }
-}

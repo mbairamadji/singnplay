@@ -26,9 +26,21 @@ module.exports = Router
                   if (err) {
                       res.send(err)
                   } else {
-                    annonce.comments.push(comment);
-                    annonce.save((err) => {
-                        err ? res.send(err) : res.redirect('/annonces/' + req.params.id)
+                    comment.author.username = req.user.username;
+                    comment.author.image    = req.user.image
+                    comment.save((err) => {
+                        if (err) {
+                            res.send(err)
+                        } else {
+                           annonce.commentaires.push(comment);
+                           annonce.save(err => {
+                               if(err) {
+                                   res.send(err)
+                               } else {
+                                   res.redirect('/annonces/' + req.params.id)
+                               }
+                           })
+                        }
                     })     
                   }
                })               

@@ -2,7 +2,7 @@ const express        = require("express")
 const router         = express.Router()
 const passport       = require("passport")
 const multer         = require("multer")
-const regMiddleware  = require("../middlewares/regMiddleware")
+const middlewareObj  = require("../middlewares/middlewares")
 const User           = require("../models/user")
 
 module.exports = router
@@ -23,7 +23,7 @@ module.exports = router
     })
 
 // Route d'inscription
-   .post('/inscription', regMiddleware,passport.authenticate("local-signup", {
+   .post('/inscription', middlewareObj.regMiddleware,passport.authenticate("local-signup", {
         successRedirect : '/',
         failureRedirect : '/inscription',
         failureFlash : true
@@ -42,10 +42,3 @@ module.exports = router
         req.logout();
         res.redirect('/annonces')
     })
-
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()) {
-    return next();
-}
-    res.redirect('/login')
-}
