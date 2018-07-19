@@ -4,9 +4,17 @@ $('.ui.basic.modal')
 ;
 
 $('.ui.small.modal')
-    .modal('attach events', '#mymodal', 'show')
+    .modal('attach events', '.mymodal', 'show')
 ;
 
 $('.ui.styled.accordion')
   .accordion()
 ;
+ $('.ui.vertical.sidebar').sidebar({
+    transition: 'overlay'
+});
+
+$('.ui.vertical.sidebar')
+  .sidebar('attach events', '.toc.item')
+;
+

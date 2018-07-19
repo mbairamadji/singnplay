@@ -1,7 +1,8 @@
 body {
     background-color: #ededed;
 }
-#mymodal {
+
+.mymodal {
     background-color : #FFF661!important;
 }
 
@@ -33,16 +34,15 @@ body {
     cursor: default !important;
 }
 .ui.styled.accordion {
-    width: auto;
+    width : 100%;
 }
-
 .form, .ui.comment.message {
     width: 60%;
     margin: auto;
 }
 
 .ui.comment.message {
-    margin-top: 1em;
+    margin-top : 1em;
 }
 
 #identifiant {
@@ -50,8 +50,9 @@ body {
 }
 
 .ui.container.top {
-    margin-top: 10em;
+    margin-top: 5em;
 }
+
 #mapContainer { 
     height: 500px; 
     
@@ -60,3 +61,27 @@ body {
 #options option[value="piano"]   { 
     background-image:url(images/piano.png); 
     }
+ .masthead.segment {
+        min-height: 7em;
+        padding: 1em 0em;
+      }
+ .ui.secondary.inverted.pointing.menu {
+     background-color: #000;
+ }
+ .secondary.pointing.menu {
+      height: 7em;
+    }
+ .secondary.pointing.menu .toc.item {
+      display: none;
+    }
+
+ @media only screen and (max-width : 800px) {
+    
+     .secondary.pointing.menu .item,
+     .secondary.pointing.menu .menu{
+         display: none !important;
+     }
+     .secondary.pointing.menu .toc.item {
+         display: block !important;
+     }
+ } 

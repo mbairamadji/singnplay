@@ -14,23 +14,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
 </head>
 <body>
-    <div class="ui inverted fixed menu">
+
+
+<!----------Sidebar------------------->
+    <div class="ui vertical inverted sidebar menu left">
         <div class="item"> 
             <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
         </div>
+        
+        <% if (currentUser) { %>
+        <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" /></span>
+        <span class="item">Bienvenue <%= currentUser.username %></span>
+        <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
+        <a class="item" href="/logout">Se Déconnecter</a>
         <a class="item" href="/apropos">A Propos</a>
         <a class="item" href="/">Annonces</a>
         <a class="item" href="/">Catégories</a>
-        <% if (currentUser) { %>
-        <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
-        <div class="ui right inverted menu">
-        <span class="item">Bienvenue <%= currentUser.username %></span>
-        <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" /></span>
-        <a class="item" href="/logout">Se Déconnecter</a>
+        
         <% } else { %>
+        <a class="item" href="/apropos">A Propos</a>
+        <a class="item" href="/">Annonces</a>
+        <a class="item" href="/">Catégories</a>
         <!-------------------------------------Modale de connexion------------------------------------------------->
         <div class="right floated item">
-            <button class="ui medium button" id="mymodal">Se Connecter</button>
+            <button class="ui medium button mymodal" id="">Se Connecter</button>
             <div class="ui small modal">
                     <div class="ui centered header">
                       Connexion
@@ -71,7 +78,73 @@
         </div>
         <!--------------------------------Fin Modale Connexion----------------------------------------->
           <% } %>
-        </div>
-      
+        
     </div>
+<!----------Page Contents------------->
+    <div class="">
+        <div class="ui inverted vertical masthead center aligned segment">
+            <div class="ui secondary inverted pointing fixed menu">
+                <a class="toc item">
+                    <i class="sidebar icon"></i>
+                </a>
+                <div class="item"> 
+                    <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
+                </div>
+                <a class="item" href="/apropos">A Propos</a>
+                <a class="item" href="/">Annonces</a>
+                <a class="item" href="/">Catégories</a>
+                <% if (currentUser) { %>
+                <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
+                <div class="ui right floated item">
+                <span class="item">Bienvenue <%= currentUser.username %></span>
+                <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" /></span>
+                <a class="item" href="/logout">Se Déconnecter</a>
+                <% } else { %>
+                <!-------------------------------------Modale de connexion------------------------------------------------->
+                <div class="right floated item">
+                    <button class="ui medium button mymodal" id="">Se Connecter</button>
+                    <div class="ui small modal">
+                            <div class="ui centered header">
+                              Connexion
+                            </div>
+                            <div class="content">
+                                <div class="left">
+                                    <form class="ui form" action="/login" method="POST"> 
+                                        <div class="field">
+                                            <label for="">Identifiant :</label>
+                                            <div class="ui left icon input" >
+                                                <i class="user icon"></i>
+                                                <input type="text" name="username" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="">Mot de passe :</label>
+                                            <div class="ui left icon input">
+                                              <i class="lock icon"></i>
+                                              <input type="password" name="password" >
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <button class="ui primary fluid button">Se Connecter</button>
+                                        </div>                                    
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="ui centered grid">
+                                    <span>Pas de compte?</span>
+                                </div>
+                                <div class="ui centered grid">
+                                    <a href="/inscription"><button class="ui primary button">S'inscrire</button></a>
+                                </div>
+                            </div>
+                            
+                    </div>
+                </div>
+                <!--------------------------------Fin Modale Connexion----------------------------------------->
+                  <% } %>
+                </div>
+            </div>
+        </div>
+   
       
