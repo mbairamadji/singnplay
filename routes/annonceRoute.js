@@ -54,7 +54,7 @@ module.exports = Router
                       console.log(annonce)
                       res.redirect("/") 
                             }
-                        })
+                        });
                     }
                 });
             }

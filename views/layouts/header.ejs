@@ -16,7 +16,7 @@
 <body>
 
 
-<!----------Sidebar------------------->
+<!--------------------------------------------------------Sidebar---------------------------------------->
     <div class="ui vertical inverted sidebar menu left">
         <div class="item"> 
             <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
@@ -24,7 +24,6 @@
         
         <% if (currentUser) { %>
         <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" /></span>
-        <span class="item">Bienvenue <%= currentUser.username %></span>
         <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
         <a class="item" href="/logout">Se Déconnecter</a>
         <a class="item" href="/apropos">A Propos</a>
@@ -35,115 +34,144 @@
         <a class="item" href="/apropos">A Propos</a>
         <a class="item" href="/">Annonces</a>
         <a class="item" href="/">Catégories</a>
-        <!-------------------------------------Modale de connexion------------------------------------------------->
-        <div class="right floated item">
-            <button class="ui medium button mymodal" id="">Se Connecter</button>
-            <div class="ui small modal">
-                    <div class="ui centered header">
-                      Connexion
-                    </div>
-                    <div class="content">
-                        <div class="left">
-                            <form class="ui form" action="/login" method="POST"> 
-                                <div class="field">
-                                    <label for="">Identifiant :</label>
-                                    <div class="ui left icon input" >
-                                        <i class="user icon"></i>
-                                        <input type="text" name="username" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label for="">Mot de passe :</label>
-                                    <div class="ui left icon input">
-                                      <i class="lock icon"></i>
-                                      <input type="password" name="password" >
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <button class="ui primary fluid button">Se Connecter</button>
-                                </div>                                    
-                            </form>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="ui centered grid">
-                            <span>Pas de compte?</span>
-                        </div>
-                        <div class="ui centered grid">
-                            <a href="/inscription"><button class="ui primary button">S'inscrire</button></a>
-                        </div>
-                    </div>
-                    
-            </div>
-        </div>
-        <!--------------------------------Fin Modale Connexion----------------------------------------->
+        
           <% } %>
         
     </div>
-<!----------Page Contents------------->
-    <div class="">
+<!-------------------------------------Page Contents--------------------------------------------->
+    <div class="ui">
         <div class="ui inverted vertical masthead center aligned segment">
             <div class="ui secondary inverted pointing fixed menu">
                 <a class="toc item">
                     <i class="sidebar icon"></i>
                 </a>
-                <div class="item"> 
+                <div class="item hide"> 
                     <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
                 </div>
-                <a class="item" href="/apropos">A Propos</a>
-                <a class="item" href="/">Annonces</a>
-                <a class="item" href="/">Catégories</a>
+                <a class="item hide" href="/apropos">A Propos</a>
+                <a class="item hide" href="/">Annonces</a>
+                <a class="item hide" href="/">Catégories</a>
+                
+                
                 <% if (currentUser) { %>
-                <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
-                <div class="ui right floated item">
-                <span class="item">Bienvenue <%= currentUser.username %></span>
-                <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" /></span>
-                <a class="item" href="/logout">Se Déconnecter</a>
-                <% } else { %>
-                <!-------------------------------------Modale de connexion------------------------------------------------->
-                <div class="right floated item">
-                    <button class="ui medium button mymodal" id="">Se Connecter</button>
-                    <div class="ui small modal">
-                            <div class="ui centered header">
-                              Connexion
-                            </div>
-                            <div class="content">
-                                <div class="left">
-                                    <form class="ui form" action="/login" method="POST"> 
-                                        <div class="field">
-                                            <label for="">Identifiant :</label>
-                                            <div class="ui left icon input" >
-                                                <i class="user icon"></i>
-                                                <input type="text" name="username" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="field">
-                                            <label for="">Mot de passe :</label>
-                                            <div class="ui left icon input">
-                                              <i class="lock icon"></i>
-                                              <input type="password" name="password" >
-                                            </div>
-                                        </div>
-                                        <div class="field">
-                                            <button class="ui primary fluid button">Se Connecter</button>
-                                        </div>                                    
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="ui centered grid">
-                                    <span>Pas de compte?</span>
-                                </div>
-                                <div class="ui centered grid">
-                                    <a href="/inscription"><button class="ui primary button">S'inscrire</button></a>
-                                </div>
-                            </div>
-                            
+<!------------------------------Menu utilisateur connecté------------------------------------------->
+                <a class="item hide" href="/annonces/ajouter">Ajouter une annonce</a>
+                <div class="right floated item logo"> 
+                    <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
+                </div>
+                <div class="ui right floated user_icon simple dropdown item">
+                    <i class="user icon" id=""></i>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <div class="item">Bienvenue <%= currentUser.username %></div>
+                        <a class="item" href="">Mes annonces</a>
+                        <a class="item" href="/logout">Se Déconnecter</a> 
                     </div>
                 </div>
-                <!--------------------------------Fin Modale Connexion----------------------------------------->
-                  <% } %>
+                <div class="ui right floated item hide">
+                <div class="item hide">
+                    <img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" />
                 </div>
+                <div class="ui simple dropdown item hide">
+                    <div class="item hide">Bienvenue <%= currentUser.username %>
+                        <i class="dropdown icon"></i>
+                    </div>
+                    <div class="menu hide">
+                        <a class="item hide" href="/users/me/annonces">Mes annonces</a>
+                        <a class="item hide" href="/logout">Se Déconnecter</a> 
+                    </div>
+                </div>
+                <% } else { %>
+<!-----------------------------------------------Menu utilisateur non connecté------------------------------------>
+                <div class="right floated item logo"> 
+                    <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
+                </div>
+                          <!----------------ICON----Modale de connexion---------------------------->
+                <div class="right floated user_icon item">
+                    <i class="ui user icon mymodal" id=""></i>
+                    <div class="ui small modal">
+                        <div class="ui centered header">
+                        Connexion
+                        </div>
+                        <div class="content">
+                            <div class="left">
+                                <form class="ui form" action="/login" method="POST"> 
+                                    <div class="field">
+                                        <label for="">Identifiant :</label>
+                                        <div class="ui left icon input" >
+                                            <i class="user icon"></i>
+                                            <input type="text" name="username" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="">Mot de passe :</label>
+                                        <div class="ui left icon input">
+                                            <i class="lock icon"></i>
+                                            <input type="password" name="password" >
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <button class="ui basic fluid button">Se Connecter</button>
+                                    </div>                                    
+                                </form>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="ui centered grid">
+                                <span>Pas de compte?</span>
+                            </div>
+                            <div class="ui centered grid">
+                                <a href="/inscription"><button class="ui basic button">S'inscrire</button></a>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+                          <!----------------Fin ICON Modale Connexion------------------------------>
+                          <!--------------------Bouton Modale de connexion------------------------->
+                <div class="right floated item hide">
+                    <button class="ui medium button mymodal" id="">Se Connecter</button>
+                    <div class="ui small modal">
+                        <div class="ui centered header">
+                        Connexion
+                        </div>
+                        <div class="content">
+                            <div class="left">
+                                <form class="ui form" action="/login" method="POST"> 
+                                    <div class="field">
+                                        <label for="">Identifiant :</label>
+                                        <div class="ui left icon input" >
+                                            <i class="user icon"></i>
+                                            <input type="text" name="username" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="">Mot de passe :</label>
+                                        <div class="ui left icon input">
+                                            <i class="lock icon"></i>
+                                            <input type="password" name="password" >
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <button class="ui basic fluid button">Se Connecter</button>
+                                    </div>                                    
+                                </form>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="ui centered grid">
+                                <span>Pas de compte?</span>
+                            </div>
+                            <div class="ui centered grid">
+                                <a href="/inscription"><button class="ui basic button">S'inscrire</button></a>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+                          <!-------------------Fin Bouton Modale Connexion------------------------->
+                <% } %> 
+            </div>
             </div>
         </div>
    

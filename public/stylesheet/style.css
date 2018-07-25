@@ -2,14 +2,28 @@ body {
     background-color: #ededed;
 }
 
-.mymodal {
+.ui.medium.button.mymodal {
     background-color : #FFF661!important;
 }
 
+.ui.right.floated.item {
+    top: 0.8em;
+    margin-right: 9em!important;
+}
+.sidebar.icon {
+    color: rgba(255, 246, 97, 1) !important;
+    font-size: 1.5em;
+}
 .ui.button {
     font-weight :700 !important;
 }
-
+.ui.simple.dropdown {
+    top: 0.7em;
+    margin-left: -2.8em !important;
+}
+.ui.simple.dropdown .menu {
+     margin-top: -1.3em !important;
+}
 .voir_btn {
     width: 100%;
     font-weight :400 !important;
@@ -18,6 +32,7 @@ body {
     transition-duration: 0.4s !important;
     cursor: pointer;
 }
+
 
 .ui.basic.button {
     background: #ededed!important;
@@ -58,9 +73,7 @@ body {
     
 }
 
-#options option[value="piano"]   { 
-    background-image:url(images/piano.png); 
-    }
+
  .masthead.segment {
         min-height: 7em;
         padding: 1em 0em;
@@ -71,17 +84,39 @@ body {
  .secondary.pointing.menu {
       height: 7em;
     }
- .secondary.pointing.menu .toc.item {
+
+ .secondary.pointing.menu .toc.item,
+ .secondary.pointing.menu .right.user_icon,
+ .secondary.pointing.menu .right.floated.logo{
       display: none;
     }
 
- @media only screen and (max-width : 800px) {
+ @media only screen and (max-width : 770px) {
     
-     .secondary.pointing.menu .item,
-     .secondary.pointing.menu .menu{
+     .secondary.pointing.menu .item.hide,
+     .secondary.pointing.menu .menu.hide    {
          display: none !important;
      }
-     .secondary.pointing.menu .toc.item {
+     .secondary.pointing.menu .toc.item,
+     .secondary.pointing.menu .right.floated.logo,
+     .right.floated.user_icon.item {
          display: block !important;
+        
      }
- } 
+     .secondary.pointing.menu .logo.item {
+       
+     }
+      .secondary.pointing.menu .toc.item {
+      margin : 1.8em 1em;
+      }
+      
+      .secondary.pointing.menu .right.user_icon {
+      margin : 2.8em 1em;
+      }
+} 
+
+@media only screen and (max-width : 670px) {
+    .secondary.pointing.menu .logo.item {
+       
+    }
+}

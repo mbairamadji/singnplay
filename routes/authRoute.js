@@ -4,6 +4,7 @@ const passport       = require("passport")
 const multer         = require("multer")
 const middlewareObj  = require("../middlewares/middlewares")
 const User           = require("../models/user")
+const Annonce        = require("../models/annonce")
 
 module.exports = router
 
@@ -41,4 +42,21 @@ module.exports = router
     .get('/logout', (req, res) => {
         req.logout();
         res.redirect('/annonces')
+    })
+//Route de l'utilisateur
+
+    .get('/users/me',  middlewareObj.isLoggedIn, (req, res) => {
+       res.render('user', {user : req.user})
+    })
+
+//Routes des annonces de l'utilisateur
+
+    .get('/users/me/annonces', (req, res)=> {
+        Annonce.find({}, (err, annonces) => {
+            if(err) {
+                res.send(err)
+            } else {
+                res.render("userAnnonce", {annonces : annonces}) 
+            }
+        })
     })

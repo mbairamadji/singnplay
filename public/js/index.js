@@ -17,4 +17,3 @@ $('.ui.styled.accordion')
 $('.ui.vertical.sidebar')
   .sidebar('attach events', '.toc.item')
 ;
-
