@@ -2,6 +2,8 @@ const express        = require('express')
 const mongoose       = require('mongoose')
 const ejs            = require('ejs')
 const cors           = require('cors')
+const flash          = require('connect-flash')
+const cookieParser   = require('cookie-parser')
 const session        = require('express-session')
 const passport       = require('passport')
 const LocalStrategy  = require('passport-local')
@@ -37,20 +39,27 @@ app.use(express.urlencoded({extended : true}))
 app.use(morgan('dev'))
 app.use(methodOverride('_method'))
 
-//Configuration de Passport
+app.use(cookieParser())
 app.use(session({
+    cookie: {
+      maxAge : 3600000
+    },
     secret : 'dynamizzy',
     resave : false,
     saveUninitialized : false
 }))
+app.use(flash())
 
+//Configuration de Passport
 app.use(passport.initialize())
 app.use(passport.session())
 require('./config/passport')(passport)
 
 app.use((req, res, next) => {
-  //  console.log(req.user)
     res.locals.currentUser = req.user;
+    res.locals.success_message = req.flash("success_message");
+    res.locals.error_message   = req.flash("error_message");
+    res.locals.error           = req.flash("error");
     next();
 })
 

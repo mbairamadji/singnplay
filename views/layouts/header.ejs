@@ -23,12 +23,12 @@
         </div>
         
         <% if (currentUser) { %>
-        <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" /></span>
-        <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
-        <a class="item" href="/logout">Se Déconnecter</a>
+        <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" />  <%= currentUser.username %></span> 
         <a class="item" href="/apropos">A Propos</a>
         <a class="item" href="/">Annonces</a>
         <a class="item" href="/">Catégories</a>
+        <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
+        <a class="item" href="/logout">Se Déconnecter</a>
         
         <% } else { %>
         <a class="item" href="/apropos">A Propos</a>
@@ -64,7 +64,9 @@
                     <i class="dropdown icon"></i>
                     <div class="menu">
                         <div class="item">Bienvenue <%= currentUser.username %></div>
-                        <a class="item" href="">Mes annonces</a>
+                        <a class ="item" href="/users/me">Mon Profil</a>
+                        <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
+                        <a class="item" href="/users/me/annonces">Mes annonces</a>
                         <a class="item" href="/logout">Se Déconnecter</a> 
                     </div>
                 </div>
@@ -77,6 +79,7 @@
                         <i class="dropdown icon"></i>
                     </div>
                     <div class="menu hide">
+                        <a class ="item" href="/users/me">Mon Profil</a>
                         <a class="item hide" href="/users/me/annonces">Mes annonces</a>
                         <a class="item hide" href="/logout">Se Déconnecter</a> 
                     </div>
@@ -87,7 +90,7 @@
                     <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
                 </div>
                           <!----------------ICON----Modale de connexion---------------------------->
-                <div class="right floated user_icon item">
+                <div class="ui right floated user_icon item">
                     <i class="ui user icon mymodal" id=""></i>
                     <div class="ui small modal">
                         <div class="ui centered header">

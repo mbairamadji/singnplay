@@ -6,9 +6,8 @@ body {
     background-color : #FFF661!important;
 }
 
-.ui.right.floated.item {
+.ui.right.floated.item.hide {
     top: 0.8em;
-    margin-right: 9em!important;
 }
 .sidebar.icon {
     color: rgba(255, 246, 97, 1) !important;
@@ -18,7 +17,6 @@ body {
     font-weight :700 !important;
 }
 .ui.simple.dropdown {
-    top: 0.7em;
     margin-left: -2.8em !important;
 }
 .ui.simple.dropdown .menu {
@@ -111,7 +109,8 @@ body {
       }
       
       .secondary.pointing.menu .right.user_icon {
-      margin : 2.8em 1em;
+      margin : 1.8em 1em;
+      color : #FFF661!important;;
       }
 } 
 

@@ -27,13 +27,14 @@ module.exports = router
    .post('/inscription', middlewareObj.regMiddleware,passport.authenticate("local-signup", {
         successRedirect : '/',
         failureRedirect : '/inscription',
-        failureFlash : true
+        failureFlash : "L'utilisateur existe déjà!"
     }))
 
 //Login
     .post('/login', passport.authenticate("local-login", {
         successRedirect : '/annonces',
-        failureRedirect : '/inscription'
+        failureRedirect : '/inscription',
+        failureFlash    : "Identifiant et/ou mot de passe invalides"
 
     }), (req, res) => {
         
@@ -41,6 +42,7 @@ module.exports = router
 //Logout
     .get('/logout', (req, res) => {
         req.logout();
+        req.flash('success_message', "Vous êtes bien déconnecté!")
         res.redirect('/annonces')
     })
 //Route de l'utilisateur
