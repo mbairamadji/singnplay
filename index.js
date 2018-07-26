@@ -46,7 +46,7 @@ app.use(session({
     },
     secret : 'dynamizzy',
     resave : false,
-    saveUninitialized : false
+    saveUninitialized : true
 }))
 app.use(flash())
 

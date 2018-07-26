@@ -17,7 +17,11 @@ module.exports = router
  .get('/apropos', (req, res) => {
         res.render('apropos')
     })
-    
+// Formulaire de connexion
+
+    .get('/login', (req, res) => {
+        res.render('login')
+    })
 // Formulaire d'inscription
     .get('/inscription', (req, res) => {
     res.render("register")
@@ -33,7 +37,7 @@ module.exports = router
 //Login
     .post('/login', passport.authenticate("local-login", {
         successRedirect : '/annonces',
-        failureRedirect : '/inscription',
+        failureRedirect : 'back',
         failureFlash    : "Identifiant et/ou mot de passe invalides"
 
     }), (req, res) => {
