@@ -31,14 +31,14 @@ module.exports = router
    .post('/inscription', middlewareObj.regMiddleware,passport.authenticate("local-signup", {
         successRedirect : '/',
         failureRedirect : '/inscription',
-        failureFlash : "L'utilisateur existe déjà!"
+        failureFlash : true
     }))
 
 //Login
     .post('/login', passport.authenticate("local-login", {
         successRedirect : '/annonces',
         failureRedirect : 'back',
-        failureFlash    : "Identifiant et/ou mot de passe invalides"
+        failureFlash    :true
 
     }), (req, res) => {
         

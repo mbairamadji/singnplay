@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sing'N'Play</title>
     <link rel="icon" type="image/png" href="/images/sing'n'play.png" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css"/>
     <link rel="stylesheet" href="/stylesheet/style.css">
     <!-------------------------------------------------Scripts-------------------------------------------------------------->
@@ -14,8 +16,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
 </head>
 <body>
-
-
 <!--------------------------------------------------------Sidebar---------------------------------------->
     <div class="ui vertical inverted sidebar menu left">
         <div class="item"> 
@@ -24,19 +24,17 @@
         
         <% if (currentUser) { %>
         <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" />  <%= currentUser.username %></span> 
-        <a class="item" href="/apropos">A Propos</a>
+        <a class="item" href="/apropos">Accueil</a>
         <a class="item" href="/">Annonces</a>
         <a class="item" href="/">Catégories</a>
         <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
         <a class="item" href="/logout">Se Déconnecter</a>
         
         <% } else { %>
-        <a class="item" href="/apropos">A Propos</a>
+        <a class="item" href="/apropos">Accueil</a>
         <a class="item" href="/">Annonces</a>
         <a class="item" href="/">Catégories</a>
-        
-          <% } %>
-        
+        <% } %>
     </div>
 <!-------------------------------------Page Contents--------------------------------------------->
     <div class="ui">
@@ -48,10 +46,9 @@
                 <div class="item hide"> 
                     <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
                 </div>
-                <a class="item hide" href="/apropos">A Propos</a>
+                <a class="item hide" href="/apropos">Accueil</a>
                 <a class="item hide" href="/">Annonces</a>
                 <a class="item hide" href="/">Catégories</a>
-                
                 
                 <% if (currentUser) { %>
 <!------------------------------Menu utilisateur connecté------------------------------------------->
@@ -177,12 +174,12 @@
             </div>
             </div>
         </div>
-        <div class="ui container">
+        <span class="ui container flash_message">
             <% if (success_message && success_message.length > 0) { %>
-                <div class="ui positive message"> <%= success_message %> </div>
+                <div class="ui positive message animated fadeInDown"> <%= success_message %> </div>
             <% } %>
             <% if (error_message && error_message.length > 0) { %>
-                <div class="ui negative message"> <%= error_message %> </div>
+                <div class="ui negative message animated fadeInDown"> <%= error_message %> </div>
             <% } %>
-        </div>
+        </span>
       

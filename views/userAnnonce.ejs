@@ -4,7 +4,7 @@
     <div class="ui four stackable cards visible">
             <% annonces.map(annonce => { %>
                <% if (annonce.author.id.equals(currentUser._id)) { %>
-                <div class="ui link card" ">
+                <div class="ui link card">
                     <div class="ui content grid">
                         <div class="ui seven wide column">
                             <span class="ui item">
@@ -25,7 +25,6 @@
                         </div>
                     </div>
                     <div class="center_content">
-                      
                         <a href="/annonces/<%=annonce.id %>">
                             <button class="ui basic button voir_btn">VOIR</button>
                         </a>
@@ -33,8 +32,8 @@
                     <div class="extra content">
                         <span><%= annonce.date.toLocaleDateString('fr-FR',{weekday: 'long', year :'numeric', month:'long', day:'numeric'}) %></span>
                     </div>
-                 <% } %>
                 </div>
+                <% } %>
             <%})%>
     </div>
 </div>

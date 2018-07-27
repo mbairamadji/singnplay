@@ -24,12 +24,6 @@ mongoose.Promise = global.Promise
 //Connexion à la base de donnée
 mongoose.connect(process.env.MLAB_URI);
 
-//Configuration de socket.io
-const http = require("http").Server(app)
-const io = require("socket.io")(http)
-io.on('connection', (socket) => {
-  console.log('a user is connected')
-})
 
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))

@@ -34,9 +34,12 @@
                         <i class="dropdown icon"></i>
                         Messages
                     </h3>
-                    <form class="ui center_content content form">
-                        <div class="field" action="" method="">
-                            <textarea name="message" id="m" ></textarea>
+                    <form class="ui center_content content form" action="/annonces/<%=annonce._id%>/send_message" method="POST">
+                        <div class="field">
+                            <input type="text" name="subject" placeholder="Sujet">
+                        </div>
+                        <div class="field">
+                            <textarea name="text" id="m" ></textarea>
                         </div>
                         <div class="field">
                             <button class="ui button">Envoyer un message</button>
@@ -76,6 +79,7 @@
             </div>
             <% } %>
         </div>
+<!--------------------------------------------------------Commentaires---------------------------------------------------------------------------->
         <h4 class="ui horizontal divider header">
             <i class="outline comment icon"></i>
             Commentaires
@@ -103,9 +107,6 @@
         </div>
 </div>
 
-<script>
-    var socket = io.connect();
-</script>
 <script>
 var map;
 var marker;

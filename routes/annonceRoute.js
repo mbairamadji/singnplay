@@ -6,6 +6,12 @@ const request        = require("request")
 const dotenv         = require("dotenv")
 dotenv.config()
 
+//Configuration Mailgun-js
+const api_key = process.env.MAILGUN_KEY
+const domain  = 'sandbox03735235dcd546c38f67dc99f6048854.mailgun.org'
+const mailgun = require('mailgun-js')({apiKey : api_key, domain : domain})
+
+//Configuration Google Maps
 var googleMapsClient = require('@google/maps').createClient({
   key: process.env.GOOGLE_KEY
 });
@@ -33,6 +39,7 @@ module.exports = Router
             } else {
              annonce.author.id       = req.user._id;
              annonce.author.username = req.user.username;
+             annonce.author.email    = req.user.email;
              annonce.author.adresse  = req.user.adresse;
              annonce.author.image    = req.user.image;
              annonce.author.phone    = req.user.phone;
@@ -72,7 +79,7 @@ module.exports = Router
         .populate("commentaires")
         .exec((err, annonce) => {
             if (err) {
-              res.send(err)  
+              res.redirect('/')  
             } else {              
                res.render('annonce' , {annonce : annonce}) 
             }
@@ -89,11 +96,11 @@ module.exports = Router
     .put('/:id', middlewareObj.checkOwnership, middlewareObj.regMiddleware,(req, res) => {
         Annonce.findById(req.params.id, (err, annonce) => {
             if (err) {
-                res.send(err)
+                res.redirect('back')
             } else {
             annonce.titre = req.body.titre;
             annonce.contenu = req.body.contenu;
-            if (req.file) {
+            if (req.file) { //Eviter erreur si pas de fichier ajouté
               annonce.image = req.file.path.slice(6);  
             }
             annonce.tag = req.body.tag;
@@ -113,4 +120,29 @@ module.exports = Router
         Annonce.findByIdAndRemove(req.params.id, (err, annonce) => {
             err ? res.send(err) : res.redirect('/annonces')
         })
+    })
+
+// Envoyer un message à l'auteur de l'annonce
+    .post('/:id/send_message', (req, res) => {
+      Annonce.findById(req.params.id, (err, annonce) => {
+          if (err) {
+              res.redirect('back')
+          } else {
+            const data = {
+            from :  req.user.email,
+            to : annonce.author.email,
+            subject : req.body.subject,
+            text : req.body.text
+             }
+             
+             mailgun.messages().send(data, (error, body) => {
+                 if (error) {
+                     req.flash('error_message', 'Message non envoyé')
+                 }
+                 res.redirect('back')
+                 req.flash('success_message', 'Message envoyé')
+                 console.log(body)
+             })
+          }
+      })
     })

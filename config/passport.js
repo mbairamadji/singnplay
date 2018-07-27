@@ -28,6 +28,7 @@ module.exports = function(passport) {
                   let newUser = new User();
                   newUser.username = username;
                   newUser.password = newUser.generateHash(password);
+                  newUser.email    = req.body.email;
                   newUser.age      = req.body.age;
                   newUser.image    = req.file.path;
                   newUser.adresse  = req.body.adresse;
@@ -50,9 +51,9 @@ module.exports = function(passport) {
                 if(err)
                     return done(err);
                 if(!user)
-                    return done(null, false, req.flash('error_message', "Utilisateur inconnu! Veuillez créer un compte"))
+                    return done(null, false, req.flash('error_message', "Utilisateur inconnu! Veuillez créer un compte svp!"))
                 if(!user.validPassword(password))
-                    return done(null, false, req.flash('error_message', "Mot de passe invalide"));
+                    return done(null, false, req.flash('error_message', "Mot de passe invalide!"));
                 return done(null, user)
                 
             })
