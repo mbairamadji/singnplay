@@ -24,16 +24,16 @@
         
         <% if (currentUser) { %>
         <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" />  <%= currentUser.username %></span> 
-        <a class="item" href="/apropos">Accueil</a>
-        <a class="item" href="/">Annonces</a>
-        <a class="item" href="/">Catégories</a>
+        <a class="item" href="/accueil">Accueil</a>
+        <a class="item" href="/annonces">Annonces</a>
+        <a class="item" href="/annonces">Catégories</a>
         <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
         <a class="item" href="/logout">Se Déconnecter</a>
         
         <% } else { %>
-        <a class="item" href="/apropos">Accueil</a>
-        <a class="item" href="/">Annonces</a>
-        <a class="item" href="/">Catégories</a>
+        <a class="item" href="/accueil">Accueil</a>
+        <a class="item" href="/annonces">Annonces</a>
+        <a class="item" href="/annonces">Catégories</a>
         <% } %>
     </div>
 <!-------------------------------------Page Contents--------------------------------------------->
@@ -46,9 +46,9 @@
                 <div class="item hide"> 
                     <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
                 </div>
-                <a class="item hide" href="/apropos">Accueil</a>
-                <a class="item hide" href="/">Annonces</a>
-                <a class="item hide" href="/">Catégories</a>
+                <a class="item hide" href="/accueil">Accueil</a>
+                <a class="item hide" href="/annonces">Annonces</a>
+                <a class="item hide" href="/annonces">Catégories</a>
                 
                 <% if (currentUser) { %>
 <!------------------------------Menu utilisateur connecté------------------------------------------->

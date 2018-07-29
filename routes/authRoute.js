@@ -10,12 +10,12 @@ module.exports = router
 
 //Rediriger vers la page d'accueil
     .get('/', (req, res) => {
-        res.redirect('/annonces')
+        res.redirect('/accueil')
     })
 
 // A propos
- .get('/apropos', (req, res) => {
-        res.render('apropos')
+ .get('/accueil', (req, res) => {
+        res.render('accueil')
     })
 // Formulaire de connexion
 

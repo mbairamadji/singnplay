@@ -13,9 +13,12 @@ body {
 }
 
 #accueil {
-    background-image: url("/images/accueil.jpg");
+   
 }
-
+.ten.wide.column {
+    font-size: 3.5em;
+    text-align: center;
+}
 .ui.medium.button.mymodal {
     background-color : #FFF661!important;
 }
@@ -37,7 +40,7 @@ body {
      margin-top: -1.3em !important;
 }
 .voir_btn {
-    width: 100%;
+    width: 50%;
     font-weight :400 !important;
     margin-bottom: 1.3em !important;
     -webkit-transition-duration: 0.4s !important; /* Safari */
@@ -50,7 +53,7 @@ body {
     background: #ededed!important;
 }
 .center_content {
-    margin: auto;
+    text-align: center;
 }
  .ui.basic.button:hover {
     background-color: #1b1c1d !important;
@@ -118,7 +121,13 @@ body {
     }
 
  @media only screen and (max-width : 770px) {
-    
+     .ten.wide.column {
+         font-size : 2em;
+         text-transform: uppercase !important;
+     }
+    .six.wide.column .ui.medium.image {
+   
+    }
      .secondary.pointing.menu .item.hide,
      .secondary.pointing.menu .menu.hide    {
          display: none !important;
@@ -138,7 +147,10 @@ body {
       
       .secondary.pointing.menu .right.user_icon {
       margin : 1.8em 1em;
-      color : #FFF661!important;;
+      color : #FFF661!important;
+      }
+      .voir_btn {
+          
       }
 } 
 
