@@ -1,0 +1,69 @@
+<% include ../layouts/header %>
+<div class="ui container top">
+    <h1 class="ui centered header">Mon profil</h1>
+    <div class="ui stackable grid">
+        <div class="five wide column">
+            <img class="ui medium bordered rounded image" src="<%= user.image.slice(6) %>"/>
+        </div>
+            <div class="eleven wide column ">
+                <div class="ui raised piled segment">
+                    <a href="/users/<%= user.id %>/annonces">
+                        <h3>Mes annonces</h3>
+                    </a>
+                    <div class="ui divider"></div>
+                    <div>
+                        <h3>Identifiant :</h3>
+                    </div>
+                    <span><%= user.username%></span>
+                    <div class="ui divider"></div>
+                    <div>
+                        <h3>E-mail :</h3>
+                    </div>
+                    <span><%= user.email%></span>
+                    <div class="ui divider"></div>
+                     <div>
+                        <h3>Adresse :</h3>
+                    </div>
+                    <span><%= user.adresse%></span>
+                    <div class="ui divider"></div>
+                    <div>
+                        <h3>Phone :</h3>
+                    </div>
+                    <span><%= user.phone%></span>
+                    <div class="ui divider"></div>
+                    <a href="/users/<%= user._id %>/update">
+                        <button class="ui basic button"> 
+                            <i class="pencil alternate icon"></i>Modifier Profil
+                        </button>
+                    </a>
+                    <div style="display:inline">
+                        <button class="ui negative basic button delete"> 
+                            <i class="window close outline icon"></i>Supprimer Compte
+                        </button>
+                        <div class="ui tiny basic modal transition visible scrolling">
+                            <div class="ui header">
+                                Supression
+                            </div>
+                            <div class="content">
+                                <p>Etes-vous sûr(e) de vouloir supprimer votre compte? Cette action entrainera la suppession de toutes vos annonces et de votre profil!</p>
+                            </div>
+                            <div class="actions">
+                                <div class="ui green basic cancel inverted button ">
+                                    <i class="remove icon"></i>
+                                    Non
+                                </div>
+                                <form action="/users/<%= user._id %>/delete?_method=DELETE" method="POST" style="display:inline">
+                                    <button class="ui red basic ok inverted button">
+                                        <i class="check icon"></i>
+                                        Oui
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../layouts/footer %>

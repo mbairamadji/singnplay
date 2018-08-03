@@ -1,0 +1,21 @@
+<% include ../layouts/header %>
+    <div class="ui centered container top">
+        <h3 class="ui centered header">Modifier votre mot de passe</h3>
+        <div class="ui form">
+            <form action="/reset/<%= token %>" method="POST">
+                <div class="field">
+                    <label for="">Nouveau mot de passe :</label>
+                    <input type="password" name="password"  placeholder="Entrez votre nouveau mot de passe" required>
+                </div>
+                <div class="field">
+                    <label for="">Confirmer mot de passe :</label>
+                    <input type="password" name="confirm"  placeholder="Entrez à nouveau le mot de passe" required>
+                </div>
+                <div class="field">
+                    <button class="ui basic button">Modifier</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+<% include ../layouts/footer %>

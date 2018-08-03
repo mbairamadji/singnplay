@@ -1,0 +1,40 @@
+<% include ../layouts/header %>
+<div class="ui centered container top">
+     <h3 class="ui centered header">Annnonces pour les intruments à vent</h3>
+         <div class="ui four stackable cards visible">
+            <% annonces.map(annonce => { %>
+               <% if (annonce.tag == 'vent') { %>
+                <div class="ui link card">
+                    <div class="ui content grid">
+                        <div class="ui seven wide column">
+                            <span class="ui item">
+                                <img src="<%= annonce.author.image.slice(6) %>" class="ui avatar image" />
+                            </span>
+                        </div>
+                        <div class="ui nine wide column" id="identifiant">
+                           <span>
+                                <h5 class="ui header"><%= annonce.author.username %></h5> 
+                            </span>
+                        <span class="meta"> <%= annonce.author.city %></span>  
+                        </div>
+                    </div>
+                        <img class="ui image" src="<%= annonce.image %>"/>
+                    <div class="content">
+                        <div class="">
+                            <p> <%= annonce.contenu.substring(0, 150) %>...</p>
+                        </div>
+                    </div>
+                    <div class="center_content">
+                        <a href="/annonces/<%=annonce.id %>">
+                            <button class="ui basic button voir_btn">VOIR</button>
+                        </a>
+                    </div>
+                    <div class="extra content">
+                        <span><%= annonce.date.toLocaleDateString('fr-FR',{weekday: 'long', year :'numeric', month:'long', day:'numeric'}) %></span>
+                    </div>
+                </div>
+                <% } %>
+            <%})%>
+    </div>
+</div>
+<% include ../layouts/footer %>

@@ -27,7 +27,8 @@ middlewareObj.isLoggedIn = (req, res, next) => {
     if(req.isAuthenticated()) {
     return next();
   }
-    res.redirect('back')
+    req.flash("Vous n'êtes pas connecté!")
+    res.redirect('/login')
 }
 
 

@@ -1,6 +1,6 @@
 
 $('.ui.basic.modal')
-    .modal('attach events', '#delete', 'show')
+    .modal('attach events', '.delete', 'show')
 ;
 
 $('.ui.small.modal')
@@ -8,6 +8,9 @@ $('.ui.small.modal')
 ;
 
 $('.ui.styled.accordion')
+  .accordion()
+;
+$('.ui.accordion')
   .accordion()
 ;
  $('.ui.vertical.sidebar').sidebar({

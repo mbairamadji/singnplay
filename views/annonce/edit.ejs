@@ -1,0 +1,36 @@
+<% include ../layouts/header %>
+<div class="ui centered container top raised segment">
+    <h1 class="ui centered header">Modifier "<%=annonce.titre %>" </h1>
+    <div class="content">
+    <div class="left">
+        <form class="ui form" action="/annonces/<%=annonce._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <div class="field">
+                <label for="">Titre :</label>
+                <input type="text" name="titre" value="<%=annonce.titre%>" required >
+            </div>
+            <div class="field">
+                <label for="">Description :</label>
+                <textarea type="text" name="contenu" value="" required ><%= annonce.contenu %></textarea>
+            </div>
+            <div class="field">
+                <label for="">Image :</label>
+                <input type="file" name="photo"  />
+            </div>
+            <div class="field">
+                <label for="">Tags :</label>
+                <select name="tag" id="options">
+                    <option value="corde" selected  > corde</option>
+                    <option value="percussion"> percussion</option>
+                    <option value="vent"> vent</option>
+                    <option value="voix">voix</option>
+                </select>
+            </div>
+            <div class="field">
+                <button class="ui basic fluid button">Modifier</button>
+            </div>                                    
+        </form>
+    </div>
+    </div>
+</div>   
+
+<% include ../layouts/footer %>

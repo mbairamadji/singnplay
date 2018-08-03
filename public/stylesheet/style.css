@@ -11,13 +11,20 @@ body {
     margin:0; 
     position:relative;
 }
-
-#accueil {
-   
+.equal.width.row .column .column{
+  
+}
+.ui.grid>.row  {
+    justify-content: space-around !important;
 }
 .ten.wide.column {
     font-size: 3.5em;
     text-align: center;
+}
+.ten.wide.column .ui.centered.grid {
+    margin-top: 0.8em;
+    font-size: 0.3em !important;
+    margin-bottom: 0.3em;
 }
 .ui.medium.button.mymodal {
     background-color : #FFF661!important;
@@ -60,6 +67,10 @@ body {
     color: #FFF661 !important;
 }
 
+.ui.raised.piled.segment .ui.mymodal {
+   float: right;
+   cursor: pointer;
+}
 .ui.link.card {
     cursor: default !important;
 }
@@ -73,7 +84,7 @@ body {
 .ui.container.flash_message {
     width: 40%;
     position : relative;
-    z-index: 9999;
+    margin-top: 1em;
     text-align: center;
     font-size: 0.9em;
 }
@@ -151,6 +162,9 @@ body {
       }
       .voir_btn {
           
+      }
+      .ten.wide.column .ui.centered.grid {
+        font-size: 0.4em !important;
       }
 } 
 

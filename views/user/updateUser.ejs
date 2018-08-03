@@ -1,0 +1,34 @@
+<% include ../layouts/header %>
+<div class="ui centered container top raised segment">
+    <h1 class="ui centered header">Modifier mon profil</h1>
+    <div class="content">
+    <div class="left">
+        <form class="ui form" action="/users/<%= user.id %>/update" method="POST">
+            <div class="field">
+                <label for="">Identifiant :</label>
+                <input type="text" name="username" value="<%= user.username %>" required >
+            </div>
+            <div class="field">
+                <label for="">Email :</label>
+                <input type="text" name="email" value="<%= user.email %>" required >
+            </div>
+            <div class="field">
+                <label for="">Adresse :</label>
+                <input type="text" name="adresse" value="<%= user.adresse %>" >
+            </div>
+             <div class="field">
+                <label for="">Téléphone(mobile/fixe) :</label>
+                <input type="text" name="phone" value="<%= user.phone %>" >
+            </div>
+            <div class="field">
+                <button class="ui basic left attached button">Modifier</button>
+                <a href="/users/<%= user.id %>" >
+                    <div class="ui basic right floated attached button">Annuler</div> 
+                </a>
+            </div>                                    
+        </form>
+    </div>
+    </div>
+</div>   
+
+<% include ../layouts/footer %>

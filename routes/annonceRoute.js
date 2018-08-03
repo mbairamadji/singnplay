@@ -2,6 +2,7 @@ const express        = require("express")
 const Router         = express.Router()
 const middlewareObj  = require("../middlewares/middlewares")
 const Annonce        = require("../models/annonce")
+const moment         = require("moment")
 const request        = require("request")
 const dotenv         = require("dotenv")
 dotenv.config()
@@ -22,11 +23,51 @@ module.exports = Router
 //Get toutes les annonces
     .get('/', (req, res) => {
         Annonce.find({}, (err, allAnnonces) => {
-            err ? res.send(err) : res.render('index', { annonces: allAnnonces})
+            err ? res.send(err) : res.render('annonce/index', { annonces: allAnnonces, moment : moment})
         })
     })
+// Route des catégories
 
-// Créer une annonce
+    .get('/categories', (req, res) => {
+        Annonce.find({}, (err, annonces) => {
+          err ? res.send(err) : res.render('annonce/category')  
+        })
+    })
+    
+// Route de la catégorie "corde"
+
+    .get('/categories/corde', (req, res) => {
+       Annonce.find({}, (err, annonces) => {
+          err ? res.send(err) : res.render('annonce/corde', { annonces: annonces})  
+        }) 
+    })
+// Route de la catégorie "vent"
+
+    .get('/categories/vent', (req, res) => {
+       Annonce.find({}, (err, annonces) => {
+          err ? res.send(err) : res.render('annonce/vent', { annonces: annonces})  
+        }) 
+    })
+// Route de la catégorie "percussion"
+
+    .get('/categories/percussion', (req, res) => {
+       Annonce.find({}, (err, annonces) => {
+          err ? res.send(err) : res.render('annonce/percussion', { annonces: annonces})  
+        }) 
+    })
+// Route de la catégorie "voix"
+
+    .get('/categories/voix', (req, res) => {
+       Annonce.find({}, (err, annonces) => {
+          err ? res.send(err) : res.render('annonce/voix', { annonces: annonces})  
+        }) 
+    })
+// Le formulaire pour ajouter une nouvelle annonce
+    .get('/ajouter', middlewareObj.isLoggedIn, (req, res) => {
+        res.render('annonce/new')
+    })
+
+// Ajouter une annonce
     .post('/', middlewareObj.isLoggedIn, middlewareObj.regMiddleware, (req, res) => {
         Annonce.create({
             titre   : req.body.titre,
@@ -58,8 +99,7 @@ module.exports = Router
                  if (err) {
                      res.send(err)
                     } else {
-                      console.log(annonce)
-                      res.redirect("/") 
+                      res.redirect("/annonces") 
                             }
                         });
                     }
@@ -68,20 +108,15 @@ module.exports = Router
         })
     })
 
-// Le formulaire pour ajouter une nouvelle annonce
-    .get('/ajouter', middlewareObj.isLoggedIn, (req, res) => {
-        res.render('new')
-    })
-
 // Get une annonce par son id
     .get('/:id', middlewareObj.isLoggedIn, (req, res) => {
         Annonce.findById(req.params.id)
         .populate("commentaires")
         .exec((err, annonce) => {
             if (err) {
-              res.redirect('/')  
+              res.redirect('back')  
             } else {              
-               res.render('annonce' , {annonce : annonce}) 
+               res.render('annonce/annonce' , {annonce : annonce}) 
             }
         }) 
     })
@@ -89,7 +124,7 @@ module.exports = Router
 // Formulaire d'édition d'une annonce
     .get('/:id/edit', middlewareObj.isLoggedIn, (req, res) => {
        Annonce.findById(req.params.id, (err, annonce)=> {
-           err ? res.send(err) : res.render('edit', { annonce : annonce})
+           err ? res.send(err) : res.render('annonce/edit', { annonce : annonce})
        })
     })
 // Editer une annonce par son id
@@ -123,7 +158,7 @@ module.exports = Router
     })
 
 // Envoyer un message à l'auteur de l'annonce
-    .post('/:id/send_message', (req, res) => {
+    .post('/:id/send_message', middlewareObj.isLoggedIn, (req, res) => {
       Annonce.findById(req.params.id, (err, annonce) => {
           if (err) {
               res.redirect('back')
@@ -139,8 +174,8 @@ module.exports = Router
                  if (error) {
                      req.flash('error_message', 'Message non envoyé')
                  }
-                 res.redirect('back')
                  req.flash('success_message', 'Message envoyé')
+                 res.redirect('back')
                  console.log(body)
              })
           }

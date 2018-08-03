@@ -38,7 +38,7 @@ app.use(session({
     cookie: {
       maxAge : 3600000
     },
-    secret : 'dynamizzy',
+    secret : process.env.SECRET,
     resave : false,
     saveUninitialized : true
 }))

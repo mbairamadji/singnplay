@@ -1,0 +1,43 @@
+<% include ../layouts/header %>
+<div class="ui centered container top raised segment">
+    <h1 class="ui centered header">Inscription</h1>
+    <div class="content">
+    <div class="left">
+        <form class="ui form" action="/inscription" method="POST" enctype="multipart/form-data">
+            <div class="field">
+                <label for="">Identifiant :</label>
+                <input type="text" name="username" placeholder="Choisissez votre identifiant" required >
+            </div>
+            <div class="field">
+                <label for="">Mot de passe :</label>
+                <input type="password" name="password" placeholder="Créez un mot de passe" required >
+            </div>
+            <div class="field">
+                <label for="">E-mail :</label>
+                <input type="email" name="email"  placeholder="Entrez votre email">
+            </div>
+            <div class="field">
+                <label for="">Age :</label>
+                <input type="date" name="age" >
+            </div>
+            <div class="field">
+                <label for="">Adresse :</label>
+                <input type="text" name="adresse" placeholder="Entrez votre adresse" >
+            </div>
+             <div class="field">
+                <label for="">Téléphone(mobile/fixe) :</label>
+                <input type="text" name="phone" placeholder="Entrez votre numéro de téléphone" >
+            </div>
+            <div class="field">
+                <label for="">Image :</label>
+                <input type="file" name="photo" >
+            </div>
+            <div class="field">
+                <button class="ui basic fluid button">S'inscrire</button>
+            </div>                                    
+        </form>
+    </div>
+    </div>
+</div>   
+
+<% include ../layouts/footer %>

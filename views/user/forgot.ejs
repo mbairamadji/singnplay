@@ -1,0 +1,17 @@
+<% include ../layouts/header %>
+    <div class="ui centered container top">
+        <h3 class="ui centered header">Mot de passe oublié</h3>
+        <div class="ui form">
+            <form action="/forgot" method="POST">
+                <div class="field">
+                    <label for="email">E-mail :</label>
+                    <input type="email" name="email"  placeholder="Entrez votre email" required>
+                </div>
+                <div class="field">
+                    <button class="ui basic button">Envoyer</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+<% include ../layouts/footer %>

@@ -16,7 +16,7 @@ const AnnonceSchema = new Schema({
         ref : 'Comment'
     }],
     author : {
-            id : {type : mongoose.Schema.Types.ObjectId, ref : "User" },
+            id : {type : Schema.Types.ObjectId, ref : "User" },
             username : String,
             adresse : String,
             geometry : {

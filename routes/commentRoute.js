@@ -3,21 +3,12 @@ const Router   = express.Router({ mergeParams : true})
 const passport = require("passport")
 const Annonce  = require("../models/annonce")
 const Comment  = require("../models/comment")
+const middlewareObj  = require("../middlewares/middlewares")
 
 module.exports = Router
-// Formulaire d'ajout d'un commentaire
-    .get('/annonces/:id/comments/new', isLoggedIn, (req, res) => {
-        Annonce.findById(req.params.id, (err, annonceACommenter) => {
-            if (err) {
-              res.send(err)  
-            } else {
-                res.render('comment', { annonce : annonceACommenter}) 
-            }
-        })
-    })
-    
+
 // Ajouter un commentaire
-    .post('/annonces/:id/comments', isLoggedIn, (req, res) => {
+    .post('/annonces/:id/comments', middlewareObj.isLoggedIn, (req, res) => {
         Annonce.findById(req.params.id, (err, annonce) => {
             if (err) {
               res.send(err)  
@@ -47,10 +38,3 @@ module.exports = Router
             }
         })
     })
-
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()) {
-    return next();
-}
-    res.redirect('/login')
-}
