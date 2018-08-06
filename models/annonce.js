@@ -7,6 +7,7 @@ const AnnonceSchema = new Schema({
     contenu : String,
     image : String,
     tag : String,
+    media : String,
     date : {
         type : Date,
         default : Date.now
@@ -26,7 +27,8 @@ const AnnonceSchema = new Schema({
             city : String,
             image : String,
             email : String,
-            phone : String
+            phone : String,
+            age : Date
     }
 })
 

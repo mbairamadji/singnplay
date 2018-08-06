@@ -17,8 +17,9 @@ module.exports = Router
                   if (err) {
                       res.send(err)
                   } else {
+                    comment.author.id       = req.user._id;
                     comment.author.username = req.user.username;
-                    comment.author.image    = req.user.image
+                    comment.author.image    = req.user.image;
                     comment.save((err) => {
                         if (err) {
                             res.send(err)

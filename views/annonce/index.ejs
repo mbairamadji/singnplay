@@ -1,6 +1,6 @@
 <% include ../layouts/header %>
 <div class="ui centered container top" >
-    <h1 class="ui centered header">Annonces Récentes</h1>
+    <h1 class="ui centered header">Annonces Publiées</h1>
     <div class="ui four stackable cards visible">
             <% annonces.map(annonce => { %>
                 <div class="ui link card">
@@ -14,7 +14,8 @@
                            <span>
                                 <h5 class="ui header"><%= annonce.author.username %> </h5> 
                             </span>
-                        <span class="meta"> <%= annonce.author.city %></span>  
+                            <span class="meta"><h5><%= moment().diff(annonce.author.age, 'years') %> ans</h5></span>
+                        <span class="meta"> <%= annonce.author.city %></span>
                         </div>
                     </div>
                         <img class="ui image" src=".<%= annonce.image %>"/>
@@ -36,7 +37,7 @@
                         
                     </div>
                     <div class="extra content">
-                        <span><%= annonce.date.toLocaleDateString('fr-FR',{weekday: 'long', year :'numeric', month:'long', day:'numeric'}) %></span>
+                       Publiée le <span><%= moment(annonce.date).locale("fr").format('DD MMMM YYYY', 'fr' ) %></span>
                     </div>
                 </div>
             <%})%>

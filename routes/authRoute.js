@@ -8,7 +8,8 @@ const crypto         = require("crypto")
 const middlewareObj  = require("../middlewares/middlewares")
 const User           = require("../models/user")
 const Annonce        = require("../models/annonce")
-
+const moment         = require("moment")
+const Comment        = require("../models/comment")
 module.exports = router
 
 //Rediriger vers la page d'accueil
@@ -227,7 +228,7 @@ module.exports = router
                     if(err) {
                         res.send(err)
                     }
-                    res.render("user/userAnnonce", {annonces : annonces}) 
+                    res.render("user/userAnnonce", {annonces : annonces, moment : moment}) 
                 })
             }
         })
@@ -236,6 +237,16 @@ module.exports = router
     // Supprimer un utilisateur
 
     .delete('/users/:id/delete', middlewareObj.isLoggedIn, (req, res) => {
+        Comment.find({}, (err, comments) => {
+            if(err) res.redirect('back');
+            comments.map(comment => {
+                if(comment.author.id.equals(req.params.id)) {
+                    comment.remove( err => {
+                        if (err) res.redirect('back');
+                    });
+                }
+            })
+        })
         Annonce.find({}, (err, annonces) => {
             if(err) res.redirect('back');
             annonces.map(annonce => {

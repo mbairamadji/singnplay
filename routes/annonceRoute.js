@@ -22,7 +22,9 @@ module.exports = Router
 
 //Get toutes les annonces
     .get('/', (req, res) => {
-        Annonce.find({}, (err, allAnnonces) => {
+        Annonce.find({})
+        .sort({ date : -1})
+        .exec((err, allAnnonces) => {
             err ? res.send(err) : res.render('annonce/index', { annonces: allAnnonces, moment : moment})
         })
     })
@@ -51,7 +53,8 @@ module.exports = Router
 // Route de la catégorie "percussion"
 
     .get('/categories/percussion', (req, res) => {
-       Annonce.find({}, (err, annonces) => {
+       Annonce.find({}
+       , (err, annonces) => {
           err ? res.send(err) : res.render('annonce/percussion', { annonces: annonces})  
         }) 
     })
@@ -69,14 +72,19 @@ module.exports = Router
 
 // Ajouter une annonce
     .post('/', middlewareObj.isLoggedIn, middlewareObj.regMiddleware, (req, res) => {
-        Annonce.create({
-            titre   : req.body.titre,
-            contenu : req.body.contenu,
-            image   : req.file.path.slice(6),
-            tag     : req.body.tag,
-        }, (err, annonce) => {
+        const newAnnonce = new Annonce();
+        newAnnonce.titre   = req.body.titre;
+        newAnnonce.contenu = req.body.contenu;
+        if (req.file) {
+            newAnnonce.image   = req.file.path.slice(6);    
+        } else {
+            newAnnonce.image  = req.user.image.slice(6);
+        }
+        newAnnonce.tag     = req.body.tag;
+        newAnnonce.save((err, annonce) => {
             if (err) {
-             res.send(err)   
+             req.flash("error_message", "L'annonce n'a pu être ajoutée") 
+             res.redirect('back')
             } else {
              annonce.author.id       = req.user._id;
              annonce.author.username = req.user.username;
@@ -84,12 +92,14 @@ module.exports = Router
              annonce.author.adresse  = req.user.adresse;
              annonce.author.image    = req.user.image;
              annonce.author.phone    = req.user.phone;
+             annonce.author.age      = req.user.age;
     
             googleMapsClient.geocode({
               address: annonce.author.adresse
             }, function(err, response) {
               if (err) {
-                  console.log(err)
+                  red.flash("error_message", "L'adresse n'a pas été localisée")
+                  res.redirect("back")
               } else {
                  // console.log(response.json.results)
                  annonce.author.geometry.lat = response.json.results[0].geometry.location.lat;
@@ -116,7 +126,7 @@ module.exports = Router
             if (err) {
               res.redirect('back')  
             } else {              
-               res.render('annonce/annonce' , {annonce : annonce}) 
+               res.render('annonce/annonce' , {annonce : annonce, moment : moment}) 
             }
         }) 
     })
@@ -154,6 +164,25 @@ module.exports = Router
     .delete('/:id', middlewareObj.checkOwnership, (req, res) => {
         Annonce.findByIdAndRemove(req.params.id, (err, annonce) => {
             err ? res.send(err) : res.redirect('/annonces')
+        })
+    })
+//Ajouter une video
+
+    .post('/:id/video', middlewareObj.checkOwnership, (req, res) => {
+        Annonce.findById(req.params.id, (err, annonce) => {
+            if (err) {
+                res.redirect('back');
+            } else {
+                 annonce.media = req.body.video;
+                 annonce.save(err => {
+                     if(err) {
+                         req.flash("error_message", "Media non ajouté");
+                         res.redirect('back')
+                     } else {
+                         res.redirect('/annonces/' + req.params.id)
+                     }
+                 })
+            }
         })
     })
 

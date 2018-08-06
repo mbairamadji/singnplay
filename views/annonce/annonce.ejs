@@ -13,19 +13,36 @@
                     </div> 
                 </div>
                 <div class="ui styled accordion">
-                    <h3 class="title">
+                    <h3 class="active title">
                         <i class="dropdown icon"></i>
                         Mes Medias
                     </h3>
-                    <div class="content">
-                        <p>Liens Youtube, Vimeo, Dailymotion...</p>
-                        
+                    <div class="active content center_content">
+                        <% if (annonce.author.id.equals(currentUser._id)) { %>
+                        <p>Liens Youtube</p>
+                        <form class="ui form" action="/annonces/<%= annonce._id %>/video" method="POST">
+                            <div class="field">
+                                <input type="text" name="video" placeholder="Entrez le lien de votre video">    
+                            </div>
+                            <div class="field">
+                                <button class="ui basic button">Ajouter</button>    
+                            </div>
+                        </form>
+                        <% } %>
+                        <% if (annonce.media) { %>
+                        <iframe  src="<%= annonce.media.substring(0,23) + /embed/ + annonce.media.slice(32) %>" frameborder="0" allow="autoplay; encrypted-media" 
+                        allowfullscreen>
+                            
+                        </iframe>
+                        <% }  else { %>
+                        <p>Pas de media ajouté</p>
+                        <% } %>
                     </div>
-                    <h3 class="active title">
+                    <h3 class="title">
                         <i class="dropdown icon"></i>
                         Contact
                     </h3>
-                    <div class="active content">
+                    <div class="content">
                          <p>Téléphone : <%= annonce.author.phone%></p>
                          <p>Adresse : <%= annonce.author.adresse %></p>
                          <div class ="ui container" id="mapContainer"></div>
@@ -49,11 +66,11 @@
                 </div>
             </div>
             <% if (currentUser && currentUser._id.equals(annonce.author.id)) { %>
-            <div class="item">
-                <a class="" href="/annonces/<%=annonce.id%>/edit" >
-                    <button class="ui basic button">Editer annonce</button>
+            <div class="item user_btn">
+                <a class="item" href="/annonces/<%=annonce.id%>/edit" >
+                    <button class="ui basic button">Editer l'annonce</button>
                 </a> 
-                <div class="" href="" style="display:inline">
+                <div class="item" style="display:inline">
                         <button class="ui negative button delete">Supprimer l'annonce</button>
                         <div class="ui tiny basic modal transition visible scrolling">
                             <div class="ui header">
@@ -92,7 +109,6 @@
                     <button class="ui basic fluid button">Envoyer</button>
                 </div>
             </form>
-            
                 <% annonce.commentaires.map(comment => { %>
                 <div class="ui comment message">
                     <img class="ui avatar image" src="<%= comment.author.image.slice(6) %>"
@@ -100,7 +116,7 @@
                         <%= comment.author.username %>
                     </h4>
                     <p> <%= comment.text %> </p>
-                    <p> <%= comment.date.toLocaleDateString() %> </p>
+                    <span class="extra"> <%= moment(annonce.date).locale("fr").format('DD MMMM YYYY', 'fr' ) %></span>
                 </div>
                 <% }) %>
 </div>

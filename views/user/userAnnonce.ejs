@@ -30,7 +30,7 @@
                         </a>
                     </div>
                     <div class="extra content">
-                        <span><%= annonce.date.toLocaleDateString('fr-FR',{weekday: 'long', year :'numeric', month:'long', day:'numeric'}) %></span>
+                        Publiée le <span><%= moment(annonce.date).locale("fr").format('DD MMMM YYYY', 'fr' ) %></span>
                     </div>
                 </div>
                 <% } %>

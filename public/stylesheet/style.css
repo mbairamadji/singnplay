@@ -11,9 +11,32 @@ body {
     margin:0; 
     position:relative;
 }
-.equal.width.row .column .column{
-  
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+  color: #0087ca;
+  margin-bottom: 2em;
+  margin-top: 0.5em;
 }
+
+.hover-underline-animation::after {
+   content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0087ca;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 .ui.grid>.row  {
     justify-content: space-around !important;
 }
@@ -43,8 +66,17 @@ body {
 .ui.simple.dropdown {
     margin-left: -2.8em !important;
 }
+.ui.simple.dropdown  .item.hide {
+    top: 0.8em !important;
+}
 .ui.simple.dropdown .menu {
      margin-top: -1.3em !important;
+}
+.ui.basic.button {
+    font-weight: 400;
+}
+.user_btn {
+    display: inline !important;
 }
 .voir_btn {
     width: 50%;
@@ -54,7 +86,11 @@ body {
     transition-duration: 0.4s !important;
     cursor: pointer;
 }
-
+ iframe {
+    margin-top: 1em; 
+    width: 560px ;
+        height: 315px ;
+ }
 
 .ui.basic.button {
     background: #ededed!important;
@@ -131,14 +167,19 @@ body {
       display: none;
     }
 
+@media only screen and (max-width : 992px) {
+    iframe {
+        width: 377px !important;
+        height: 250px !important;
+     }
+}
+
  @media only screen and (max-width : 770px) {
      .ten.wide.column {
          font-size : 2em;
          text-transform: uppercase !important;
      }
-    .six.wide.column .ui.medium.image {
-   
-    }
+    
      .secondary.pointing.menu .item.hide,
      .secondary.pointing.menu .menu.hide    {
          display: none !important;
@@ -166,10 +207,15 @@ body {
       .ten.wide.column .ui.centered.grid {
         font-size: 0.4em !important;
       }
+       iframe {
+        width: 480px !important;
+        height: 270px !important;
+     }
 } 
 
-@media only screen and (max-width : 670px) {
-    .secondary.pointing.menu .logo.item {
-       
-    }
+@media only screen and (max-width : 565px) {
+    iframe {
+        width: 315px !important;
+        height: 220px !important;
+     }
 }

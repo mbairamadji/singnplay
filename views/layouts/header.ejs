@@ -25,16 +25,16 @@
         
         <% if (currentUser) { %>
         <span class="ui item"><img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" />  <%= currentUser.username %></span> 
-        <a class="item" href="/accueil">Accueil</a>
-        <a class="item" href="/annonces/categories">Annonces</a>
-        <a class="item" href="/annonces/categories">Catégories</a>
-        <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
+        <a class="item" href="/accueil"><i class="home icon"></i>Accueil</a>
+        <a class="item" href="/annonces"><i class="bullhorn icon"></i>Annonces</a>
+        <a class="item" href="/annonces/categories"><i class="tags icon"></i>Catégories</a>
+        <a class="item" href="/annonces/ajouter"><i class="plus circle icon"></i> Ajouter une annonce</a>
         <a class="item" href="/logout">Se Déconnecter</a>
         
         <% } else { %>
-        <a class="item" href="/accueil">Accueil</a>
-        <a class="item" href="/annonces">Annonces</a>
-        <a class="item" href="/annonces/categories">Catégories</a>
+        <a class="item" href="/accueil"><i class="home icon"></i>Accueil</a>
+        <a class="item" href="/annonces"><i class="bullhorn icon"></i>Annonces</a>
+        <a class="item" href="/annonces/categories"><i class="plus circle icon"></i>Catégories</a>
         <% } %>
     </div>
 <!-------------------------------------Page Contents--------------------------------------------->
@@ -47,13 +47,13 @@
                 <div class="item hide"> 
                     <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
                 </div>
-                <a class="item hide" href="/accueil">Accueil</a>
-                <a class="item hide" href="/annonces">Annonces</a>
-                <a class="item hide" href="/annonces/categories">Catégories</a>
+                <a class="item hide" href="/accueil"><i class="home icon"></i>Accueil</a>
+                <a class="item hide" href="/annonces"><i class="bullhorn icon"></i>Annonces</a>
+                <a class="item hide" href="/annonces/categories"><i class="tags icon"></i>Catégories</a>
                 
                 <% if (currentUser) { %>
 <!------------------------------Menu utilisateur connecté------------------------------------------->
-                <a class="item hide" href="/annonces/ajouter">Ajouter une annonce</a>
+                <a class="item hide" href="/annonces/ajouter"><i class="plus circle icon"></i>Ajouter une annonce</a>
                 <div class="right floated item logo"> 
                     <img class="ui tiny image" src="/images/sing'n'play.png" alt="">
                 </div>
@@ -61,7 +61,7 @@
                     <i class="user icon" id=""></i>
                     <i class="dropdown icon"></i>
                     <div class="menu">
-                        <div class="item">Bienvenue <%= currentUser.username %></div>
+                        <div class="item">Bienvenu(e) <%= currentUser.username %></div>
                         <a class ="item" href="/users/<%= currentUser.id %>">Mon Profil</a>
                         <a class="item" href="/annonces/ajouter">Ajouter une annonce</a>
                         <a class="item" href="/users/<%= currentUser.id %>/annonces">Mes annonces</a>
@@ -73,7 +73,7 @@
                     <img src="<%= currentUser.image.slice(6) %>" class="ui avatar image" />
                 </div>
                 <div class="ui simple dropdown item hide">
-                    <div class="item hide">Bienvenue <%= currentUser.username %>
+                    <div class="item hide">Bienvenu(e) <%= currentUser.username %>
                         <i class="dropdown icon"></i>
                     </div>
                     <div class="menu hide">
