@@ -16,10 +16,18 @@ const UserSchema = new mongoose.Schema({
         age: Date,
         image : String,
         adresse : String,
+        loc : {
+                type : {type: String, default: "Point" },
+                coordinates : { type: [Number]},
+                
+                        },
+        city : String,
         phone : String,
         resetPasswordToken   : String,
         resetPasswordExpires : Date
 })
+
+UserSchema.index({ loc : "2dsphere"});
 
 
 UserSchema.methods.generateHash = function(password) {

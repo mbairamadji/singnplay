@@ -40,6 +40,10 @@ body {
 .ui.grid>.row  {
     justify-content: space-around !important;
 }
+.ui.card>.content, .ui.cards>.card>.content  {
+  
+}
+
 .ten.wide.column {
     font-size: 3.5em;
     text-align: center;
@@ -61,7 +65,7 @@ body {
     font-size: 1.5em;
 }
 .ui.button {
-    font-weight :700 !important;
+    font-weight :500 !important;
 }
 .ui.simple.dropdown {
     margin-left: -2.8em !important;
@@ -86,10 +90,20 @@ body {
     transition-duration: 0.4s !important;
     cursor: pointer;
 }
+.zone_button {
+    width: 100%;
+    display : inline-flex !important;
+    margin-top: 0em !important;
+}
+
+
+.ui.menu {
+    font-size: 1.2em;
+}
  iframe {
     margin-top: 1em; 
     width: 560px ;
-        height: 315px ;
+    height: 315px ;
  }
 
 .ui.basic.button {
@@ -113,7 +127,7 @@ body {
 .ui.styled.accordion {
     width : 100%;
 }
-.form, .ui.comment.message {
+.form_model, .ui.comment.message {
     width: 60%;
     margin: auto;
 }
@@ -140,7 +154,7 @@ body {
 }
 
 .ui.container.top {
-    margin-top: 5em;
+    margin-top: 3.5em;
     margin-bottom: 5em ;
 }
 
@@ -158,7 +172,7 @@ body {
      background-color: #1b1c1d;
  }
  .secondary.pointing.menu {
-      height: 7em;
+      height: 6em;
     }
 
  .secondary.pointing.menu .toc.item,
@@ -201,9 +215,7 @@ body {
       margin : 1.8em 1em;
       color : #FFF661!important;
       }
-      .voir_btn {
-          
-      }
+
       .ten.wide.column .ui.centered.grid {
         font-size: 0.4em !important;
       }

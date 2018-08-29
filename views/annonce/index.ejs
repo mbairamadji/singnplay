@@ -1,27 +1,27 @@
 <% include ../layouts/header %>
 <div class="ui centered container top" >
-    <h1 class="ui centered header">Annonces Publiées</h1>
-    <div class="ui four stackable cards visible">
+     <h1 class="ui centered header">Annonces Publiées</h1>
+    <div class="ui three stackable cards visible">
             <% annonces.map(annonce => { %>
                 <div class="ui link card">
                     <div class="ui content grid">
                         <div class="ui seven wide column">
                             <span class="ui item">
-                                <img src="<%= annonce.author.image.slice(6) %>" class="ui avatar image" />
+                                <img src="<%= annonce.authorId.image.slice(6) %>" class="ui avatar image" />
                             </span>
                         </div>
                         <div class="ui nine wide column" id="identifiant">
                            <span>
-                                <h5 class="ui header"><%= annonce.author.username %> </h5> 
+                                <h5 class="ui header"><%= annonce.authorId.username %> </h5> 
                             </span>
-                            <span class="meta"><h5><%= moment().diff(annonce.author.age, 'years') %> ans</h5></span>
-                        <span class="meta"> <%= annonce.author.city %></span>
+                            <span class="meta"><h5><%= moment().diff(annonce.authorId.age, 'years') %> ans</h5></span>
+                        <span class="meta"> <%= annonce.authorId.city %></span>
                         </div>
                     </div>
                         <img class="ui image" src=".<%= annonce.image %>"/>
                     <div class="content">
                         <div class="">
-                            <p> <%= annonce.contenu.substring(0, 150) %>...</p>
+                            <p> <%= annonce.contenu.substring(0, 100) %>...</p>
                         </div>
                     </div>
                     <div class="center_content">

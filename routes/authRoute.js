@@ -10,7 +10,19 @@ const User           = require("../models/user")
 const Annonce        = require("../models/annonce")
 const moment         = require("moment")
 const Comment        = require("../models/comment")
+
+
+
+//Configuration Google Maps
+var googleMapsClient = require('@google/maps').createClient({
+  key: process.env.GOOGLE_KEY
+});
+
+
+
 module.exports = router
+
+
 
 //Rediriger vers la page d'accueil
     .get('/', (req, res) => {
@@ -41,7 +53,7 @@ module.exports = router
 //Login
     .post('/login', passport.authenticate("local-login", {
         successRedirect : '/annonces',
-        failureRedirect : 'back',
+        failureRedirect : '/login',
         failureFlash    :true
 
     }), (req, res) => {
@@ -201,7 +213,7 @@ module.exports = router
 
 //Routes de modification des détails de l'utilisateur  
 
-    .post('/users/:id/update', middlewareObj.isLoggedIn, (req, res, next) => {
+    .post('/users/:id/update', middlewareObj.isLoggedIn, middlewareObj.regMiddleware, (req, res, next) => {
         User.update( {_id : req.session.passport.user}, 
         { username : req.body.username,
           email    : req.body.email,
@@ -209,9 +221,29 @@ module.exports = router
           phone    : req.body.phone,
         }, (err, user) => {
             if (err)  return next(err);
-            User.findById(req.user._id, (err, user) => {
+            User.findById({_id : req.user.id} ,(err, user) => {
                 if (err) return next(err);
-                 req.flash("success_message", "Votre profil a été modifié")
+                if (req.file) {
+                user.image   = req.file.path;
+                }
+                googleMapsClient.geocode({
+                    address : req.body.adresse
+                }, (err, response) => {
+                     if(err) {
+                          req.flash("error_message", "L'adresse n'a pas été localisée")
+                          return next(err)
+                      } else {
+                           user.loc = {type : "Point", coordinates : [response.json.results[0].geometry.location.lng, 
+                                                           response.json.results[0].geometry.location.lat]
+                           }
+                           user.city = response.json.results[0].address_components[2].long_name; 
+                            user.save((err) => {
+                             if (err) throw err;
+                             return next(null, user)
+                        })
+                      }
+                })
+                 req.flash("success_message", "Votre profil a été modifié");
                  res.redirect('/users/' + req.params.id);
             })
         })
@@ -224,7 +256,9 @@ module.exports = router
             if(err) {
                 res.send(err)
             } else {
-                Annonce.find({}, (err, annonces) => {
+                Annonce.find({})
+                .populate("authorId")
+                .exec((err, annonces) => {
                     if(err) {
                         res.send(err)
                     }

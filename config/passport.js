@@ -2,6 +2,11 @@ const passport      = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const User          = require("../models/user")
 
+//Configuration Google Maps
+var googleMapsClient = require('@google/maps').createClient({
+  key: process.env.GOOGLE_KEY
+});
+
 module.exports = function(passport) {
     
     passport.serializeUser(function (user, done) {
@@ -32,10 +37,24 @@ module.exports = function(passport) {
                   newUser.image    = req.file.path;
                   newUser.adresse  = req.body.adresse;
                   newUser.phone    = req.body.phone;
-                  newUser.save((err) => {
-                      if (err)
-                      throw err;
-                      return done(null, newUser)
+                  
+                  googleMapsClient.geocode({
+                      address : newUser.adresse
+                  }, (err, response) => {
+                      if(err) {
+                          req.flash("error_message", "L'adresse n'a oas été localisée")
+                          return done(err)
+                      } else {
+                           newUser.loc = {type : "Point", coordinates : [response.json.results[0].geometry.location.lng, 
+                                                           response.json.results[0].geometry.location.lat]
+                           }
+                           newUser.city = response.json.results[0].address_components[2].long_name; 
+                          newUser.save((err) => {
+                          if (err)
+                          throw err;
+                          return done(null, newUser)
+                        })
+                      }
                   })
               }
           })  

@@ -3,7 +3,7 @@
     <h1 class="ui centered header">Modifier mon profil</h1>
     <div class="content">
     <div class="left">
-        <form class="ui form" action="/users/<%= user.id %>/update" method="POST">
+        <form class="ui form form_model" action="/users/<%= user.id %>/update" method="POST" enctype="multipart/form-data">
             <div class="field">
                 <label for="">Identifiant :</label>
                 <input type="text" name="username" value="<%= user.username %>" required >
@@ -11,6 +11,10 @@
             <div class="field">
                 <label for="">Email :</label>
                 <input type="text" name="email" value="<%= user.email %>" required >
+            </div>
+            <div class="field">
+                <label for="">Image :</label>
+                <input type="file" name="photo" >
             </div>
             <div class="field">
                 <label for="">Adresse :</label>

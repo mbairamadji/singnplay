@@ -1,27 +1,44 @@
 <% include ../layouts/header %>
 <div class="ui centered container top">
      <h3 class="ui centered header">Annnonces pour le chant</h3>
-         <div class="ui four stackable cards visible">
+     <% if(currentUser) { %>
+    <div class="ui tall stacked segment">
+        <h5 class="ui header">Filtrer les annonces par zone géographique selon votre position:</h5>
+          <div class="ui zone_button">
+        <form class="ui form" action="/annonces/search/category_voix/10km" method="POST">
+            <button class="ui basic button"><i class="search icon"></i>Rayon de 0 à 10 Km</button>
+        </form>
+        <form class="ui form" action="/annonces/search/category_voix/25km" method="POST">
+            <button class="ui basic button"><i class="search icon"></i>Rayon de 0 à 25 Km</button>
+        </form>
+        <form class="ui item form" action="/annonces/search/category_voix/50km" method="POST">
+            <button class="ui basic button"><i class="search icon"></i>Rayon de 0 à 50 Km</button>
+        </form>
+    </div>
+    </div>
+  <%  } %>
+         <div class="ui three stackable cards visible">
             <% annonces.map(annonce => { %>
                <% if (annonce.tag == 'voix') { %>
                 <div class="ui link card">
                     <div class="ui content grid">
                         <div class="ui seven wide column">
                             <span class="ui item">
-                                <img src="<%= annonce.author.image.slice(6) %>" class="ui avatar image" />
+                                <img src="<%= annonce.authorId.image.slice(6) %>" class="ui avatar image" />
                             </span>
                         </div>
                         <div class="ui nine wide column" id="identifiant">
                            <span>
-                                <h5 class="ui header"><%= annonce.author.username %></h5> 
+                                <h5 class="ui header"><%= annonce.authorId.username %></h5> 
                             </span>
-                        <span class="meta"> <%= annonce.author.city %></span>  
+                            <span class="meta"><h5><%= moment().diff(annonce.authorId.age, 'years') %> ans</h5></span>
+                        <span class="meta"> <%= annonce.authorId.city %></span>  
                         </div>
                     </div>
                         <img class="ui image" src="<%= annonce.image %>"/>
                     <div class="content">
                         <div class="">
-                            <p> <%= annonce.contenu.substring(0, 150) %>...</p>
+                            <p> <%= annonce.contenu.substring(0, 100) %>...</p>
                         </div>
                     </div>
                     <div class="center_content">
@@ -30,7 +47,7 @@
                         </a>
                     </div>
                     <div class="extra content">
-                        <span><%= annonce.date.toLocaleDateString('fr-FR',{weekday: 'long', year :'numeric', month:'long', day:'numeric'}) %></span>
+                        <span><%= moment(annonce.date).locale("fr").format('DD MMMM YYYY', 'fr' ) %></span>
                     </div>
                 </div>
                 <% } %>

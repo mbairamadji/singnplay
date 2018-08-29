@@ -10,14 +10,14 @@ middlewareObj.regMiddleware = (req, res, next)  => {
         cb(null,  './public/uploads')
     },
     filename : function(req, file, cb){
-      //  console.log(file)
+        console.log(file)
         let imageName = file.originalname
         cb(null, imageName)
     }
   });
   const upload = multer({storage : uploadStorage}).single('photo');
   upload(req, res, (err) => {
-    //  console.log(req.file)
+      console.log(req.file)
       req.uploadError = err;
       next();
   })
@@ -38,7 +38,7 @@ middlewareObj.checkOwnership = (req, res, next) => {
             if (err) {
                 res.send(err)
             } else {
-                    if (annonce.author.id.equals(req.user._id)) {
+                    if (annonce.authorId._id.equals(req.user._id)) {
                         next();
                     } else {
                     res.redirect("back")

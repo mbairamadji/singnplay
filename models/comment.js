@@ -7,11 +7,7 @@ const CommentSchema = new mongoose.Schema({
         type : Date,
         default : Date.now
     },
-    author : {
-        id : {type : mongoose.Schema.Types.ObjectId, ref : 'User'},
-        username : String,
-        image : String
-    }
+    author : {type : mongoose.Schema.Types.ObjectId, ref : 'User'}
 })
 
 

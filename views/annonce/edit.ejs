@@ -3,7 +3,7 @@
     <h1 class="ui centered header">Modifier "<%=annonce.titre %>" </h1>
     <div class="content">
     <div class="left">
-        <form class="ui form" action="/annonces/<%=annonce._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <form class="ui form form_model" action="/annonces/<%=annonce.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="field">
                 <label for="">Titre :</label>
                 <input type="text" name="titre" value="<%=annonce.titre%>" required >
@@ -26,7 +26,7 @@
                 </select>
             </div>
             <div class="field">
-                <button class="ui basic fluid button">Modifier</button>
+                <button class="ui basic fluid button">Modifier/Actualiser</button>
             </div>                                    
         </form>
     </div>

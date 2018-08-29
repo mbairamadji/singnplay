@@ -16,20 +16,13 @@ const AnnonceSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : 'Comment'
     }],
-    author : {
-            id : {type : Schema.Types.ObjectId, ref : "User" },
-            username : String,
-            adresse : String,
-            geometry : {
-               long : Number,
-               lat : Number
-            },
-            city : String,
-            image : String,
-            email : String,
-            phone : String,
-            age : Date
-    }
+    authorId : { type : Schema.Types.ObjectId, ref : "User"
+    },
+    annonceLoc : {
+    type : {type: String, default: "Point" },
+    coordinates : { type: [Number]},
+     },
 })
 
+AnnonceSchema.index({ "annonceLoc" : "2dsphere"})
 module.exports = mongoose.model("Annonce", AnnonceSchema)

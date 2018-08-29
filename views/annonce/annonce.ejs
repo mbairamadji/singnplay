@@ -3,7 +3,7 @@
     <div class="ui container items">
         <div class="item">
             <div class="ui medium image">
-                <img  src="<%= annonce.author.image.slice(6) %>" />
+                <img  src="<%= annonce.authorId.image.slice(6) %>" />
             </div>
             <div class="content">
                 <div class="ui raised segment">
@@ -13,14 +13,15 @@
                     </div> 
                 </div>
                 <div class="ui styled accordion">
+<!--------------------------------------------MEDIAS---------------------------------------------------->                        
                     <h3 class="active title">
                         <i class="dropdown icon"></i>
                         Mes Medias
                     </h3>
                     <div class="active content center_content">
-                        <% if (annonce.author.id.equals(currentUser._id)) { %>
+                        <% if (annonce.authorId.equals(currentUser._id)) { %>
                         <p>Liens Youtube</p>
-                        <form class="ui form" action="/annonces/<%= annonce._id %>/video" method="POST">
+                        <form class="ui form form_model" action="/annonces/<%= annonce._id %>/video" method="POST">
                             <div class="field">
                                 <input type="text" name="video" placeholder="Entrez le lien de votre video">    
                             </div>
@@ -38,22 +39,24 @@
                         <p>Pas de media ajouté</p>
                         <% } %>
                     </div>
+<!--------------------------------------------CONTACTS---------------------------------------------------->                        
                     <h3 class="title">
                         <i class="dropdown icon"></i>
                         Contact
                     </h3>
                     <div class="content">
-                         <p>Téléphone : <%= annonce.author.phone%></p>
-                         <p>Adresse : <%= annonce.author.adresse %></p>
+                         <p>Téléphone : <%= annonce.authorId.phone%></p>
+                         <p>Adresse : <%= annonce.authorId.adresse %></p>
                          <div class ="ui container" id="mapContainer"></div>
                     </div>
+<!--------------------------------------------MESSAGERIE MAILGUN---------------------------------------------------->                        
                     <h3 class="title">
                         <i class="dropdown icon"></i>
                         Messages
                     </h3>
-                    <form class="ui center_content content form" action="/annonces/<%=annonce._id%>/send_message" method="POST">
+                    <form class="ui center_content content form form_model" action="/annonces/<%=annonce._id%>/send_message" method="POST">
                         <div class="field">
-                            <input type="text" name="subject" placeholder="Sujet">
+                            <input type="text" name="subject" placeholder="Sujet" required>
                         </div>
                         <div class="field">
                             <textarea name="text" id="m" ></textarea>
@@ -65,7 +68,9 @@
                 </div>
                 </div>
             </div>
-            <% if (currentUser && currentUser._id.equals(annonce.author.id)) { %>
+<!--------------------------------------------BOUTONS Edition et Suppression---------------------------------------------------->                        
+
+            <% if (currentUser && currentUser._id.equals(annonce.authorId._id)) { %>
             <div class="item user_btn">
                 <a class="item" href="/annonces/<%=annonce.id%>/edit" >
                     <button class="ui basic button">Editer l'annonce</button>
@@ -101,7 +106,7 @@
             <i class="outline comment icon"></i>
             Commentaires
         </h4>
-            <form class="ui form" action="/annonces/<%= annonce.id %>/comments" method="POST">
+            <form class="ui form form_model" action="/annonces/<%= annonce.id %>/comments" method="POST">
                 <div class="field">
                     <textarea name="comment[text]" placeholder="votre commentaire"></textarea>
                 </div>
@@ -116,7 +121,7 @@
                         <%= comment.author.username %>
                     </h4>
                     <p> <%= comment.text %> </p>
-                    <span class="extra"> <%= moment(annonce.date).locale("fr").format('DD MMMM YYYY', 'fr' ) %></span>
+                    <span class="extra"> <%= moment(comment.date).locale("fr").format('DD MMMM YYYY', 'fr' ) %></span>
                 </div>
                 <% }) %>
 </div>
@@ -124,7 +129,7 @@
 <script>
 var map;
 var marker;
-var center = {lat: <%= annonce.author.geometry.lat%>, lng: <%= annonce.author.geometry.long%>}
+var center = {lat: <%= annonce.authorId.loc.coordinates[1]%>, lng: <%= annonce.authorId.loc.coordinates[0]%>}
       function initMap() {
         map = new google.maps.Map(document.getElementById('mapContainer'), {
           center: center,
