@@ -274,7 +274,7 @@ module.exports = router
         Comment.find({}, (err, comments) => {
             if(err) res.redirect('back');
             comments.map(comment => {
-                if(comment.author.id.equals(req.params.id)) {
+                if(comment.author.equals(req.params.id)) {
                     comment.remove( err => {
                         if (err) res.redirect('back');
                     });
@@ -284,7 +284,7 @@ module.exports = router
         Annonce.find({}, (err, annonces) => {
             if(err) res.redirect('back');
             annonces.map(annonce => {
-                if(annonce.author.id.equals(req.params.id)) {
+                if(annonce.authorId.equals(req.params.id)) {
                     annonce.remove( err => {
                         if (err) res.redirect('back');
                     });

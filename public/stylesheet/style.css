@@ -154,6 +154,7 @@ body {
 }
 
 .ui.container.top {
+    width: 80%;
     margin-top: 3.5em;
     margin-bottom: 5em ;
 }
